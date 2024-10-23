@@ -9,7 +9,7 @@ interface FadingComponentProps {
   onChange?: () => void;
 }
 
-const FadingComponent = (Component: JSX.Element) => ({ visible, time, onChange, children }: PropsWithChildren<FadingComponentProps>) => {
+const FadingComponent = ({ visible, time, onChange, children }: PropsWithChildren<FadingComponentProps>) => {
   const [showComponent, setShowComponent] = useState(false);
 
   useEffect(() => {
