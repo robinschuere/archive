@@ -30,7 +30,7 @@ const FadingComponent = (Component: JSX.Element) => ({ visible, time, onChange, 
     }
   },[visible, time]);
 
-  return show ? children : null;
+  return showComponent ? children : null;
 }
 
-export default VanishingComponent;
+export default FadingComponent;
