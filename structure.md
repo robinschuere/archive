@@ -31,4 +31,5 @@
           FeatureComponent.test
           FeatureComponent
           index
+      index
 ```
