@@ -1,6 +1,6 @@
-// feature repository folder setup
+# Monorepo with feature folder setup
 
-
+```bash
 /src
   /api
     /auth
@@ -31,3 +31,4 @@
           FeatureComponent.test
           FeatureComponent
           index
+```
