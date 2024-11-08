@@ -3,19 +3,6 @@ This readme has some topics which I endured during my experience as a developer.
 
 # Monorepo with feature folder setup
 
-<details>
-  <summary>/src</summary>
-  <details>
-    <summary>  /shared</summary>
-    <details>
-      <summary>    /api</summary>
-    </details>
-  </details>
-  <details>
-    <summary>  /features</summary>
-  </details>
-</details>
-
 ```bash
 /src
   /shared
@@ -88,5 +75,100 @@ Based on this questions, we can have everything which is necessary to design a g
 
 We always need to define some types, so it is interesting to define a separate file types.d.ts which hold all the types that are used and linked in the component.
 
-When designing the component, take a mental note that it should be "dumb". It should do one thing and one thing only.
+When designing the component, take a mental note that it should be "dumb". It should do one thing and one thing only. It is okay to hold a self-state (meaning that it is self-managing), but the state should not flow outside of its own container.
 
+When thinking about side effects (React specific useEffect) do remember that this is problematic when working with bigger applications. After a while the syntax of useEffects will make you vomit on code itself, and when defining a good generic component, you should, by all means, avoid useEffects. Without them, your life will be more beautiful. Also, when you want to ship your component across multiorgans (SSR) useEffect and useState should be avoided at all costs since otherwise your component has to be written as a Client Side Component.
+
+When thinking about exposing properties and methods, be sure to give them simple names. By no means should you create methods that contain business logical namings
+
+```typescript
+return (
+  <>
+    <CellStructureValueChangedConfirmation
+      confirmationTitle="Proceed"
+      confirmationMessage="Are you sure you wish to proceed?"
+      confirmationModalConfirmButtonMessage="Proceed"
+      confirmationModalCancelButtonMessage="Cancel"
+      handleConfirmationModalConfirmMessage={() => {
+        modalstate.confirm();
+        onProceed();
+      }}
+      onCancel={modalState.close}
+    />
+  </>
+);
+```
+
+The previous code has some values which could easily be made into a more specific components so that a lot of business specific logic is abstracted and could be placed inside a more functional re-usable component. Also, long names will make code unreadable. 
+
+Let's tackle this.
+
+```typescript
+// Modals/types.d.ts
+
+interface DefaultModalProps {
+  isOpen: boolean;
+  message: string;
+}
+
+export interface ModalProps extends DefaultModalProps {
+  title: string;
+  onSuccess: () => void;
+  onCancel: () => void;
+  successMessage: string;
+  cancelMessage: string;
+}
+
+export interface ProceedModalProps extends DefaultModalProps {
+  onProceed: () => void;
+  onCancel: () => void;
+}
+
+// Modals/Modal.tsx
+const Modal = ({ isOpen, title, message, onSuccess, onCancel, successMessage, cancelMessage }: ModalProps) => {
+  return (
+    <modal open={isOpen}>
+      <h2>{title}</h2>
+      <p>{message}</p>
+      <form>
+        <button>{cancelMessage}</button>
+        <button>{successMessage}</button>
+      </form>
+    </modal>
+  );
+}
+
+//Modal/ProceedModal.tsx
+const ProceedModal = ({ isOpen, message, onProceed, onCancel }: ProceedModalProps) => {
+  return (
+    <Modal
+      isOpen={isOpen}
+      title={title}
+      message={message}
+      onSuccess={onProceed}
+      onCancel={onCancel}
+      successMessage="Proceed"
+      cancelMessage="Cancel"
+    />
+  );
+}
+
+// inside a parent component
+const [isOpen, close] = useModal();
+
+const handleProceed = () => {
+  close();
+  cellStructureValueChanged();
+}
+
+return (
+  <>
+    <ProceedModal
+      isOpen={modalState.isOpen()}
+      message="Are you sure you wish to proceed?"
+      onProceed={handleProceed}
+      onCancel={close}
+    />
+  </>
+);
+```
