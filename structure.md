@@ -6,13 +6,13 @@ This readme has some topics which I endured during my experience as a developer.
 <details>
   <summary>/src</summary>
   <details>
-    <summary>/shared</summary>
+    <summary>  /shared</summary>
     <details>
-      <summary>/api</summary>
+      <summary>    /api</summary>
     </details>
   </details>
   <details>
-    <summary>/features</summary>
+    <summary>  /features</summary>
   </details>
 </details>
 
