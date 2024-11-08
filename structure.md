@@ -79,7 +79,7 @@ When designing the component, take a mental note that it should be "dumb". It sh
 
 When thinking about side effects (React specific useEffect) do remember that this is problematic when working with bigger applications. After a while the syntax of useEffects will make you vomit on code itself, and when defining a good generic component, you should, by all means, avoid useEffects. Without them, your life will be more beautiful. Also, when you want to ship your component across multiorgans (SSR) useEffect and useState should be avoided at all costs since otherwise your component has to be written as a Client Side Component.
 
-When thinking about exposing properties and methods, be sure to give them simple names. By no means should you create methods that contain business logical namings
+When thinking about exposing properties and methods, be sure to give them simple names. By no means should you create methods that contain business logical namings.
 
 ```typescript
 return (
@@ -108,11 +108,11 @@ Let's tackle this.
 
 interface DefaultModalProps {
   isOpen: boolean;
-  message: string;
 }
 
 export interface ModalProps extends DefaultModalProps {
   title: string;
+  message: string;
   onSuccess: () => void;
   onCancel: () => void;
   successMessage: string;
@@ -120,11 +120,13 @@ export interface ModalProps extends DefaultModalProps {
 }
 
 export interface ProceedModalProps extends DefaultModalProps {
+  title?: string;
+  message?: string;
   onProceed: () => void;
   onCancel: () => void;
 }
 
-// Modals/Modal.tsx
+// /shared/components/Modal/Modal.tsx
 const Modal = ({ isOpen, title, message, onSuccess, onCancel, successMessage, cancelMessage }: ModalProps) => {
   return (
     <modal open={isOpen}>
@@ -138,8 +140,9 @@ const Modal = ({ isOpen, title, message, onSuccess, onCancel, successMessage, ca
   );
 }
 
-//Modal/ProceedModal.tsx
-const ProceedModal = ({ isOpen, message, onProceed, onCancel }: ProceedModalProps) => {
+// /featureA/components/ProceedModal/ProceedModal.tsx
+import { Modal } from '@shared/components'
+const ProceedModal = ({ isOpen, title = "Proceed?", message = "Are you sure you wish to proceed?", onProceed, onCancel }: ProceedModalProps) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -154,7 +157,7 @@ const ProceedModal = ({ isOpen, message, onProceed, onCancel }: ProceedModalProp
 }
 
 // inside a parent component
-const [isOpen, close] = useModal();
+const [isOpen, open, close] = useModal();
 
 const handleProceed = () => {
   close();
@@ -165,10 +168,16 @@ return (
   <>
     <ProceedModal
       isOpen={modalState.isOpen()}
-      message="Are you sure you wish to proceed?"
       onProceed={handleProceed}
       onCancel={close}
     />
   </>
 );
 ```
+
+In retrospect:
+
+- We placed all types inside a generic types.d.ts file, neat!
+- We correctly defined our methods that should be exposed
+- We defined 2 components instead of one and split them according to the requesting feature.
+
