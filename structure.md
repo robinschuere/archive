@@ -4,52 +4,76 @@ This readme has some topics which I endured during my experience as a developer.
 # Monorepo with feature folder setup
 
 ```bash
-/src
-  /shared
-    /api
-      /auth
-        types.d.ts
-        index
-    /components
-      /ComponentA
-        ComponentA.styles.ts | css
-        ComponentA.test.ts
-        types.d.ts
-        ComponentA.tsx
-        index.ts
-      index.ts
-    /helpers
-      /helperA
-        helperA.ts
-        helperA.test.ts
-        index.ts
-      index.ts
-  /applications
-    /someapp
-      /pages
-        /page
-          index.ts
-      router
-      types.d.ts
-      styles.ts
-      index.ts
-  /features
-    /featureA
-      /api
-        /featureApi
-          types.d.ts
-          index.ts
-      /components
-        /FeatureComponent
-          FeatureComponent.styles
-          FeatureComponent.test
-          FeatureComponent
-          types.d.ts
-          index.ts
-      index.ts
-package.json
-package-lock.json
-readme
+├──src
+|   ├──applications
+|   |   ├──applicationA
+|   |   |   ├──pages
+|   |   |   |   ├──pageA
+|   |   |   |   |   ├──pageA.tsx
+|   |   |   |   ├──index.ts
+|   |   |   ├──index.ts
+|   |   |   ├──router.tsx
+|   |   |   ├──styles.ts
+|   |   |   ├──types.d.ts
+|   |   |   ├──tsconfig.json
+|   |   |   ├──.env
+|   ├──features
+|   |   ├──components
+|   |   |   ├──FeatureComponent
+|   |   |   |   ├──FeatureComponent.styles
+|   |   |   |   ├──FeatureComponent.test
+|   |   |   |   ├──FeatureComponent
+|   |   |   |   ├──types.d.ts
+|   |   |   |   ├──index.ts
+|   |   |   ├──index.ts
+|   |   ├──hooks
+|   |   |   ├──featureHookA
+|   |   |   |   ├──featureHookA.ts
+|   |   |   |   ├──featureHookA.test.ts
+|   |   |   |   ├──index.ts
+|   |   |   ├──index.ts
+|   |   ├──services
+|   |   |   ├──featureServiceA
+|   |   |   |   ├──featureServiceA
+|   |   |   |   ├──types.d.ts
+|   |   |   |   ├──index.ts
+|   |   ├──utils
+|   |   |   ├──featureUtilA
+|   |   |   |   ├──featureUtilA.ts
+|   |   |   |   ├──featureUtilA.test.ts
+|   |   |   |   ├──index.ts
+|   |   |   ├──index.ts
+|   ├──shared
+|   |   ├──components
+|   |   |   ├──ComponentA
+|   |   |   |   ├──ComponentA.styles.ts | css
+|   |   |   |   ├──ComponentA.test.ts
+|   |   |   |   ├──types.d.ts
+|   |   |   |   ├──ComponentA.tsx
+|   |   |   |   ├──index.ts
+|   |   |   ├──index.ts
+|   |   ├──hooks
+|   |   |   ├──hookA
+|   |   |   |   ├──hookA.ts
+|   |   |   |   ├──hookA.test.ts
+|   |   |   |   ├──index.ts
+|   |   |   ├──index.ts
+|   |   ├──services
+|   |   |   ├──auth
+|   |   |   |   ├──types.d.ts
+|   |   |   |   ├──index
+|   |   ├──utils
+|   |   |   ├──utilA
+|   |   |   |   ├──utilA.ts
+|   |   |   |   ├──utilA.test.ts
+|   |   |   |   ├──index.ts
+|   |   |   ├──index.ts
+├──package.json
+├──package-lock.json
+├──tsconfig.base.json
+├──readme
+├──eslintrc.json
+├──gitignore
 ```
 
 ## Pitfals
