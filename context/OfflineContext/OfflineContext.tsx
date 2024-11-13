@@ -31,7 +31,7 @@ const reducer = (state, action) => {
   }
 }
 
-const OfflineProvider = ({ children, syncer , syncInterval = 3000 }) => {
+export const OfflineProvider = ({ children, syncer , syncInterval = 3000 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
