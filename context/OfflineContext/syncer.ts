@@ -1,18 +1,18 @@
 type SyncerConfig = {
-  shouldInvalidateOnDuplicate: boolean;
-  shouldInvalidateOnCheck: boolean;
-  shouldInvalidateOnRemove: boolean;
+  shouldValidateInsertAfterCheck: boolean;
+  shouldValidateUpdateAfterCheck: boolean;
+  shouldValidateRemoveAfterCheck: boolean;
 }
 
-export const syncer = (actions, config = { shouldInvalidateOnDuplicate: true, shouldInvalidateOnCheck: true } : SyncerConfig) => async (value: OfflineValue) => {
+export const syncer = (actions, config = { shouldInvalidateInsertAfterCheck: true, shouldInvalidateUpdateAfterCheck: true, shouldInvalidateRemoveAfterCheck: true } : SyncerConfig) => async (value: OfflineValue) => {
   const context = actions[value.contextValue];
   
   if (!context) {
     console.error(`Not existing context was given: '${value.contextValue}'. Make sure the provider gets an actions object that holds contexts and their actions.`);
     return false;
   }
-  if (!context.get || !context.insert || !context.update || !context.remove || !context.check) {
-    console.error(`Context '${value.contextValue}' is not complete. See to it that the functions 'get', 'insert', 'update', 'remove' and 'check' are always available!`);
+  if (!context.get || !context.insert || !context.update || !context.remove || !context.checkInsert || !context.checkUpdate || !context.checkRemove) {
+    console.error(`Context '${value.contextValue}' is not complete. \r\nSee to it that the functions \r\n'get', 'insert', 'update', 'remove', 'checkInsert', 'checkUpdate', 'checkRemove' \r\nare always available!`);
     return false;
   }
   if (!['insert', 'update', 'remove'].includes(value.contextAction)) {
@@ -21,25 +21,28 @@ export const syncer = (actions, config = { shouldInvalidateOnDuplicate: true, sh
   }
   
   if (value.contextAction === 'insert') {
-    const isDuplicate = await context.check(value.params);
-    if (!isDuplicate) {
+    const canInsert = await context.checkInsert(value.params);
+    if (canInsert) {
       await context.insert(value.params);
+      return true;
     }
-    return config.shouldInvalidateOnDuplicate ? true : false;
+    return shouldValidateInsertAfterCheck ? true : false;
   }
   if (value.contextAction === 'update') {
-    const existingValue = await context.get(value.id);
-    if (existingValue.updatedAt < value.time) {
-      await context.update(value.id, ...value.params);
+    const canUpdate = await context.checkUpdate(value.params);
+    if (canUpdate) {
+      await context.update(value.id, value.params);
+      return true;
     }
-    return config.shouldInvalidateOnCheck ? true : false;
+    return shouldValidateUpdateAfterCheck ? true : false;
   }
   if (value.contextAction === 'remove') {
-    const existingValue = await context.get(value.id);
-    if (!existingValue.removedAt) {
+    const canRemove = await context.checkRemove(value.params);
+    if (canRemove) {
       await context.remove(value.id);
+      return true;
     }
-    return true;
+    return shouldValidateRemoveAfterCheck ? true : false;
   }
   return false
 }
