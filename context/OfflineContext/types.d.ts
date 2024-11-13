@@ -18,7 +18,7 @@ export type OfflineValue = {
   contextAction: 'update' | 'remove' | 'insert';
   id: string;
   params: any[];
-  time: number;
+  key: number;
 }
 
 export type StateValue = {
