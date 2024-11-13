@@ -5,13 +5,11 @@ export type BaseEntity = {
 }
 
 export type ActionContext = {
-  [key: string]: {
-    get: (id: string) => Promise<BaseEntity>;
-    update: (id: string, params: any[]) => Promise<void>;
-    remove: (id: string) => Promise<void>;
-    insert: (id: string, params: any[]) => Promise<void>;
-    check: (params: any[]) => Promise<Boolean>;
-  }
+  get: (id: string) => Promise<BaseEntity>;
+  update: (id: string, params: any[]) => Promise<void>;
+  remove: (id: string) => Promise<void>;
+  insert: (id: string, params: any[]) => Promise<void>;
+  check: (params: any[]) => Promise<Boolean>;
 }
 
 export type OfflineValue = {
