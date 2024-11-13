@@ -1,4 +1,10 @@
-export const syncer = (actions) => async (value: OfflineValue) => {
+type SyncerConfig = {
+  shouldInvalidateOnDuplicate: boolean;
+  shouldInvalidateOnCheck: boolean;
+  shouldInvalidateOnRemove: boolean;
+}
+
+export const syncer = (actions, config = { shouldInvalidateOnDuplicate: true, shouldInvalidateOnCheck: true } : SyncerConfig) => async (value: OfflineValue) => {
   const context = actions[value.contextValue];
   
   if (!context) {
@@ -19,14 +25,14 @@ export const syncer = (actions) => async (value: OfflineValue) => {
     if (!isDuplicate) {
       await context.insert(value.params);
     }
-    return true;
+    return config.shouldInvalidateOnDuplicate ? true : false;
   }
   if (value.contextAction === 'update') {
     const existingValue = await context.get(value.id);
     if (existingValue.updatedAt < value.time) {
       await context.update(value.id, ...value.params);
     }
-    return true;
+    return config.shouldInvalidateOnCheck ? true : false;
   }
   if (value.contextAction === 'remove') {
     const existingValue = await context.get(value.id);
