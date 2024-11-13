@@ -40,9 +40,14 @@ const defaultSyncerConfig = { shouldInvalidateInsertAfterCheck: true, shouldInva
 const defaultSyncerInterval = 3000
 const defaultStorageKey = 'DEFAULT_OFFLINE_KEY_PROVIDER';
 
-export const OfflineProvider = ({ children, actions, syncerConfig = defaultSyncerConfig, syncerInterval = defaultSyncerInterval, storageKey= defaultStorageKey }) => {
+const useOfflineReducer = (storageKey, actions) => {
   const [state, dispatch] = useReducer(reducer(storageKey), getLocalStorageData(storageKey) || {});
-  const synchronize = syncer(actions);
+
+  return [state, dispatch, syncer(actions)];
+}
+
+export const OfflineProvider = ({ children, actions, syncerConfig = defaultSyncerConfig, syncerInterval = defaultSyncerInterval, storageKey= defaultStorageKey }) => {
+  const [state, dispatch, synchronize] = useOfflineReducer(storageKey, actions);
   
   useEffect(() => {
     const intervalId = setInterval(async () => {
