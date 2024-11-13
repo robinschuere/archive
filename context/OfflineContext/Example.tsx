@@ -1,8 +1,10 @@
 import { OfflineProvider } from './OfflineContext';
+import { actions } from './actions';
 
 export default function App() {
+  
   return (
-    <OfflineProvider syncerInterval={2500}>
+    <OfflineProvider actions={actions} syncerInterval={2500}>
       <button>Add</button>
     </OfflineProvider>
   );
