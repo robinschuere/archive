@@ -7,7 +7,6 @@ const todoActions: ActionContext<Todo> = {
     remove: async (id: string) => api.removeTodo(id),
     insert: async (params) => api.addTodo(...params),
     check: async (params) => api.checkIfDuplicateTodo(...params),
-    getAll: async () => api.getTodos(),
   }
 
 export const actions = {
