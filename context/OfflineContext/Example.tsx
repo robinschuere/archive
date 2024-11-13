@@ -6,8 +6,8 @@ const OfflineTodoList = () => {
   const { state } = useOfflineContext();
   return Object.entries(state)
     .filter(s => s.contextValue === 'todo')
-    .map(({ contextValue, contextAction, params, id, time}) => (
-    <span>
+    .map(({ contextValue, contextAction, params, id, key}) => (
+    <span key={key}>
       {contextValue}: {params[0].name} Offline...
     </span>
   );
