@@ -60,11 +60,9 @@ const remove = async (context, id, shouldValidateRemoveAfterCheck) => {
 }
 
 export const syncer = (actions, config : SyncerConfig) => {
-  if (checkContextSynchronizerSetup(actions)) {
-    throw new Error('Syncer setup is invalid...');
-  } 
+  checkContextSynchronizerSetup(actions);
   
-  const synchronizer = async (value: OfflineValue) => {
+  return (value: OfflineValue) => {
     const context = getContext(actions, value.contextValue);
     checkDispatchedContextAction(value.contextAction)
 
@@ -84,47 +82,50 @@ export const syncer = (actions, config : SyncerConfig) => {
   };
 };
 
-export const wrappedActions = (actions) => ({
-  insert: async (contextValue: string, params: any[]) => {
-    if (window.navigator.onLine) {
-      try {
-        const context = getContext(actions, contextValue);
-        await insert(context, params);
+export const wrappedActions = (actions, dispatch) => {
+  checkContextSynchronizerSetup(actions);
+  return {
+    insert: async (contextValue: string, params: any[]) => {
+      if (window.navigator.onLine) {
+        try {
+          const context = getContext(actions, contextValue);
+          await insert(context, params);
+          return true;
+        } catch (ex) {
+          return false;
+        }
+      } else {
+        dispatch({ type: 'add', data: { params, contextValue, contextAction: 'insert' }});
         return true;
-      } catch (ex) {
-        return false;
       }
-    } else {
-      dispatch({ type: 'add', data: { params, contextValue, contextAction: 'insert' }});
-      return true;
-    }
-  },
-  update: async (contextValue: string, id: string, params: any[]) => {
-    if (window.navigator.onLine) {
-      try {
-        const context = getContext(actions, contextValue);
-        await update(context, id, params);
+    },
+    update: async (contextValue: string, id: string, params: any[]) => {
+      if (window.navigator.onLine) {
+        try {
+          const context = getContext(actions, contextValue);
+          await update(context, id, params);
+          return true;
+        } catch (ex) {
+          return false;
+        }
+      } else {
+        dispatch({ type: 'add', data: { id, params, contextValue, contextAction: 'update' }});
         return true;
-      } catch (ex) {
-        return false;
       }
-    } else {
-      dispatch({ type: 'add', data: { id, params, contextValue, contextAction: 'update' }});
-      return true;
-    }
-  },
-  remove: async (contextValue: string, id: string) => {
-    if (window.navigator.onLine) {
-      try {
-        const context = getContext(actions, contextValue);
-        await remove(context, id);
+    },
+    remove: async (contextValue: string, id: string) => {
+      if (window.navigator.onLine) {
+        try {
+          const context = getContext(actions, contextValue);
+          await remove(context, id);
+          return true;
+        } catch (ex) {
+          return false;
+        }
+      } else {
+        dispatch({ type: 'add', data: { id, contextValue, contextAction: 'remove' }});
         return true;
-      } catch (ex) {
-        return false;
       }
-    } else {
-      dispatch({ type: 'add', data: { id, contextValue, contextAction: 'remove' }});
-      return true;
     }
   }
-});
+};
