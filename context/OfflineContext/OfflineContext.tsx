@@ -1,3 +1,5 @@
+import { useReducer, useContext, useEffect } from 'react';
+
 // get the current data
 const getLocalStorageData=(key: string) => {
   const storage = localStorage.getItem(key);
@@ -13,26 +15,28 @@ const setLocalStorageData = (key: string, value: StateValue) => {
   }
   localStorage.setItem(key, JSON.stringify(value));
 }
-// Define the initial state
-const initialState: StateValue = getLocalStorageData('OFFLINE_DATA') || {};
  
 // Define the reducer function to handle state transitions
-const reducer = (state, action) => {
+const reducer = (key) => (state, action) => {
   const now = new Date().valueOf();
   switch (action.type) {
     case 'add':
       state[now] = { ...action.data, time: now }
-      return { ...state };
+      const newState = { ...state };
+      setLocalStorageData(key, newState);
+      return newState;
     case 'remove':
       delete state[action.time]
-      return { ...state };
+      const newState =  { ...state };
+      setLocalStorageData(key, newState);
+      return newState;
     default:
       throw new Error();
   }
 }
 
-export const OfflineProvider = ({ children, syncer , syncInterval = 3000 }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export const OfflineProvider = ({ children, syncer, syncInterval = 3000, key= 'DEFAULT_OFFLINE_KEY_PROVIDER' }) => {
+  const [state, dispatch] = useReducer(reducer(key), getLocalStorageData(key) || {});
 
   useEffect(() => {
     const intervalId = setInterval(syncer, syncInterval);
