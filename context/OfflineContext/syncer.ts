@@ -1,4 +1,4 @@
-export const saveValue = (actions) => async (value: OfflineValue) => {
+export const syncer = (actions) => async (value: OfflineValue) => {
   const context = actions[value.contextValue];
   if(!context) {
     console.error(`Context is available for value '${value.contextValue}'. See to it that the functions 'get', 'insert', 'update', 'remove' and 'check' are available as wel as the context!`);
