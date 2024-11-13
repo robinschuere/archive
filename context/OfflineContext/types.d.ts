@@ -19,7 +19,6 @@ export type OfflineValue = {
   id: string;
   params: any[];
   time: number;
-  status: 'offline' | 'online'
 }
 
 export type StateValue = {
