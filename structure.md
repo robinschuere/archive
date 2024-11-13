@@ -26,6 +26,8 @@ This readme has some topics which I endured during my experience as a developer.
 |   |   |   |   ├──types.d.ts
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
+|   |   ├──context
+|   |   |   ├──contextA.tsx
 |   |   ├──hooks
 |   |   |   ├──featureHookA
 |   |   |   |   ├──featureHookA.ts
@@ -85,6 +87,27 @@ When everything is a feature, it is hard to define something that isn't. This al
 
 ### Every feature becomes a shared Component!
 When boundaries are not hard enough or explicitly defined, it becomes clear that a lot of the features are bound to become shared. To counter this, features have to be clearly defined by their creators so that their use has a clear boundary and thus marking it as a feature.
+
+# Provider-Context Design
+When designing a context to be used as a provider, there is no need to placed them in separate files as this will just complicate things. They are to be used together!
+
+```typescript
+import { useState, useContext, createContext } from 'react';
+
+const ThemeContext = createContext("light", () => "light");
+
+const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState("light");
+
+ return (
+   <ThemeContext.Provider value={{ theme, setTheme }}>
+     {children}
+   </ThemeContext.Provider>
+ );
+}
+
+export { ThemeContext, ThemeProvider };
+```
 
 # Component Design
 
