@@ -22,12 +22,12 @@ const reducer = (key) => (state, action) => {
   const now = new Date().valueOf();
   switch (action.type) {
     case 'add':
-      state[now] = { ...action.data, time: now }
+      state[now] = { ...action.data, key: now }
       const newState = { ...state };
       setLocalStorageData(key, newState);
       return newState;
     case 'remove':
-      delete state[action.time]
+      delete state[action.key]
       const newState =  { ...state };
       setLocalStorageData(key, newState);
       return newState;
@@ -44,7 +44,14 @@ export const OfflineProvider = ({ children, actions, syncInterval = 3000, key= '
     const intervalId = setInterval(async () => {
       const stateValueKeys = Object.keys(state).sort();
       if (stateValueKeys.length > 0) {
-        await synchronize(state[stateValueKeys[0]);
+        try {
+          const resolved = await synchronize(state[stateValueKeys[0]);
+          if (resolved) {
+            dispatch({ type: 'remove', key: state[stateValueKeys[0].key })
+          }
+        } catch(ex) {
+          console.error(ex)
+        }
       }
     }, syncInterval);
     () => clearInterval(intervalId);
