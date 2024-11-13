@@ -22,7 +22,7 @@ const reducer = (key) => (state, action) => {
   const now = new Date().valueOf();
   switch (action.type) {
     case 'add':
-      state[now] = { ...action.data, key: now, status: 'offline' }
+      state[now] = { ...action.data, key: now, status: action.status }
       const newState = { ...state };
       setLocalStorageData(key, newState);
       return newState;
