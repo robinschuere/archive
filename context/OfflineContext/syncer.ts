@@ -9,8 +9,8 @@ export const syncer = (actions, config : SyncerConfig) => async (value: OfflineV
     console.error(`Not existing context was given: '${value.contextValue}'. Make sure the provider gets an actions object that holds contexts and their actions.`);
     return false;
   }
-  if (!context.get || !context.insert || !context.update || !context.remove) {
-    console.error(`Context '${value.contextValue}' is not complete. \r\nSee to it that the functions \r\n'get', 'insert', 'update', 'remove'\r\nare always available!`);
+  if (!context.insert || !context.update || !context.remove) {
+    console.error(`Context '${value.contextValue}' is not complete. \r\nSee to it that the functions \r\n'insert', 'update', 'remove'\r\n are always available!`);
     return false;
   }
   
