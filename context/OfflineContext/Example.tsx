@@ -1,11 +1,27 @@
 import { OfflineProvider } from './OfflineContext';
 import { actions } from './actions';
 
-export default function App() {
+const ChildComponent = () => {
+  const { dispatch } = useOfflineContext();
+  const [formValues, setFormValues] = useState({ name: '' });
+  
+  const handleSave = () => {
+    dispatch({ type: 'add', data: formValues });
+    setFormValues({ name: '' });
+  }
   
   return (
+    <form>
+      <input type="text" onChange={(e) => setFormvalues((current) => ({...current, name: e.target.value})}} />
+      <button onClick={handleSave}>Save</button>
+    </form>
+  );
+}
+
+export default function App() {
+  return (
     <OfflineProvider actions={actions} syncerInterval={2500}>
-      <button>Add</button>
+      <button onClick>Add</button>
     </OfflineProvider>
   );
 }
