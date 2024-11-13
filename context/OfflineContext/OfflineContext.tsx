@@ -36,8 +36,12 @@ const reducer = (key) => (state, action) => {
   }
 }
 
-export const OfflineProvider = ({ children, actions, syncInterval = 3000, key= 'DEFAULT_OFFLINE_KEY_PROVIDER' }) => {
-  const [state, dispatch] = useReducer(reducer(key), getLocalStorageData(key) || {});
+const defaultSyncerConfig = { shouldInvalidateInsertAfterCheck: true, shouldInvalidateUpdateAfterCheck: true, shouldInvalidateRemoveAfterCheck: true }
+const defaultSyncerInterval = 3000
+const defaultStorageKey = 'DEFAULT_OFFLINE_KEY_PROVIDER';
+
+export const OfflineProvider = ({ children, actions, syncerConfig = defaultSyncerConfig, syncerInterval = defaultSyncerInterval, storageKey= defaultStorageKey }) => {
+  const [state, dispatch] = useReducer(reducer(storageKey), getLocalStorageData(storageKey) || {});
   const synchronize = syncer(actions);
   
   useEffect(() => {
@@ -53,7 +57,7 @@ export const OfflineProvider = ({ children, actions, syncInterval = 3000, key= '
           console.error(ex)
         }
       }
-    }, syncInterval);
+    }, syncerInterval);
     () => clearInterval(intervalId);
   }, [saveValues]);
   
