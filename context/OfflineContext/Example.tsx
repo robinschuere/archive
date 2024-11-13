@@ -1,5 +1,6 @@
 import { OfflineProvider } from './OfflineContext';
 import { actions } from './actions';
+import { wrappedActions } from './syncer';
 
 const OfflineTodoList = () => {
   const { state } = useOfflineContext();
@@ -16,9 +17,9 @@ const AddTodo = () => {
   const { dispatch } = useOfflineContext();
   const [formValues, setFormValues] = useState({ name: '' });
   
-  const handleSave = () => {
-    dispatch({ type: 'add', data: { id: undefined, params: [{...formValues}], contextValue: 'todo', contextAction: 'insert' });
-    setFormValues({ name: '' });
+  const handleSave = async () => {
+    const inserted = await wrappedActions(actions).insert('todo', [{...formValues}])
+    if (inserted) setFormValues({ name: '' });
   }
   
   return (
