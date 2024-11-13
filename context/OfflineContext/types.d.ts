@@ -1,16 +1,16 @@
-type BaseEntity = {
+export type BaseEntity = {
   id: string;
   updatedAt?: number;
   removedAt?: number;
 }
 
-export type ActionContext<T extends BaseEntity> = {
+export type ActionContext = {
   [key: string]: {
-    get: (id: string) => Promise<T>;
+    get: (id: string) => Promise<BaseEntity>;
     update: (id: string, params: any[]) => Promise<void>;
     remove: (id: string) => Promise<void>;
     insert: (id: string, params: any[]) => Promise<void>;
-    check: (params: any[]) => Promise<boolean>;
+    check: (params: any[]) => Promise<Boolean>;
   }
 }
 
