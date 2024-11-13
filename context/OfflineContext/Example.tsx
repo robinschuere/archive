@@ -4,13 +4,23 @@ import { wrappedActions } from './syncer';
 
 const OfflineTodoList = () => {
   const { state } = useOfflineContext();
-  return Object.entries(state)
-    .filter(s => s.contextValue === 'todo')
-    .map(({ contextValue, contextAction, params, id, key}) => (
-    <span key={key}>
-      {contextValue}: {params[0].name} Offline...
-    </span>
-  );
+  const [todos, setTodos] = useState({});
+
+  useEffect(async () => {
+    const getTodos = async () => {
+      const onlineTodos = await api.getTodos();
+      const offlineTodos = Object.entries(state).filter(s => s.contextValue === 'todo').map(s => ({
+        id: s.id || s.key,
+        updatedAt: s.key,
+        ...params,
+        offline: true
+      }));
+      setTodos([...todos, setTodos].sort((a,b) => a.updatedAt - b.updatedAt));
+    };
+    getTodos()
+  }, [state])
+
+  return todos.map(todo => (<span>{todo.name} | {todo.offline ? <OrangeBullet /> : <GreenBullet />}</span>));
 }
 
 const AddTodo = () => {
