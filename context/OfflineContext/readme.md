@@ -3,4 +3,8 @@ The code in this folder was never tested!
 
 This folder has 3 files to maintain an OfflineContext.
 
-The idea is that the provider is wrapped around components that have CRUD actions to maintain their values.
+  - OfflineContext.tsx which holds all information about the reducer, provider, context and localstorage logic
+  - types.d.ts which holds all types information
+  - syncer which holds all information about how the data is synced.
+
+The Provider is wrapped around all necessary components that should have offline behaviour.
