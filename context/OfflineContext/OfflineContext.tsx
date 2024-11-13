@@ -42,12 +42,13 @@ const defaultStorageKey = 'DEFAULT_OFFLINE_KEY_PROVIDER';
 
 const useOfflineReducer = (storageKey, actions) => {
   const [state, dispatch] = useReducer(reducer(storageKey), getLocalStorageData(storageKey) || {});
-  const { synchronizer, wrappedActions } = syncer(actions);
-  return [state, dispatch, synchronizer, wrappedActions];
+  
+  return [state, dispatch];
 }
 
 export const OfflineProvider = ({ children, actions, syncerConfig = defaultSyncerConfig, syncerInterval = defaultSyncerInterval, storageKey= defaultStorageKey }) => {
   const [state, dispatch, synchronize] = useOfflineReducer(storageKey, actions);
+  const synchronize = syncer(actions);
   
   useEffect(() => {
     const intervalId = setInterval(async () => {
