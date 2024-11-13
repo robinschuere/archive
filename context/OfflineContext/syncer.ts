@@ -1,8 +1,4 @@
-type SyncerConfig = {
-  shouldValidateInsertAfterCheck: boolean;
-  shouldValidateUpdateAfterCheck: boolean;
-  shouldValidateRemoveAfterCheck: boolean;
-}
+import { SyncerConfig, OfflineValue } from './types';
 
 export const syncer = (actions, config : SyncerConfig) => async (value: OfflineValue) => {
   const context = actions[value.contextValue];
