@@ -6,7 +6,7 @@ const ChildComponent = () => {
   const [formValues, setFormValues] = useState({ name: '' });
   
   const handleSave = () => {
-    dispatch({ type: 'add', data: formValues });
+    dispatch({ type: 'add', data: { id: undefined, params: [{...formValues}], contextValue: 'todo', contextAction: 'insert' });
     setFormValues({ name: '' });
   }
   
