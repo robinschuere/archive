@@ -1,4 +1,5 @@
 import { useReducer, useContext, useEffect } from 'react';
+import { syncer } from './syncer';
 
 // get the current data
 const getLocalStorageData=(key: string) => {
@@ -35,11 +36,11 @@ const reducer = (key) => (state, action) => {
   }
 }
 
-export const OfflineProvider = ({ children, syncer, syncInterval = 3000, key= 'DEFAULT_OFFLINE_KEY_PROVIDER' }) => {
+export const OfflineProvider = ({ children, actions, syncInterval = 3000, key= 'DEFAULT_OFFLINE_KEY_PROVIDER' }) => {
   const [state, dispatch] = useReducer(reducer(key), getLocalStorageData(key) || {});
 
   useEffect(() => {
-    const intervalId = setInterval(syncer, syncInterval);
+    const intervalId = setInterval(syncer(actions), syncInterval);
     () => clearInterval(intervalId);
   }, [saveValues]);
   
