@@ -32,7 +32,7 @@ const AddTodo = () => {
 export default function App() {
   return (
     <OfflineProvider actions={actions} syncerInterval={2500}>
-      <TodoList />
+      <OfflineTodoList />
       <AddTodo />
     </OfflineProvider>
   );
