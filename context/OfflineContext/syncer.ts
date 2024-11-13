@@ -1,4 +1,4 @@
-const saveValue = (actions) => async (value: OfflineValue) => {
+export const saveValue = (actions) => async (value: OfflineValue) => {
   const context = actions[value.contextValue];
   if(!context) {
     console.error(`Context is available for value '${value.contextValue}'. See to it that the functions 'get', 'insert', 'update', 'remove' and 'check' are available as wel as the context!`);
@@ -30,20 +30,4 @@ const saveValue = (actions) => async (value: OfflineValue) => {
     return true;
   }
   return false
-}
-
-// get the current data
-const getLocalStorageData=(key: string) => {
-  const storage = localStorage.getItem(key);
-  return JSON.parse(storage)
-}
-
-// set the data in localStorage data
-const setLocalStorageData = (key: string, value: StateValue) => {
-  const isInValid = Object.entries(value).find(s => !s.contextValue || !s.contextAction || !s.id) 
-    || Object.entries(value).find(s => ['update', 'insert'].includes(s.contextAction) && (!Array.isArray(s.params) || !s.params.length));
-  if (isInValid) {
-    throw new Error('Values to store are not in the correct format!');
-  }
-  localStorage.setItem(key, JSON.stringify(value));
 }
