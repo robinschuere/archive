@@ -1,8 +1,6 @@
 import { ActionContext } from './types';
 
-
-
-const actions = {
+export const actions = {
   todo: {
     get: async (id: string) => api.getTodo(id),
     update: async (id: string, params: any[]) => api.updateTodo(id, ...params),
