@@ -4,7 +4,7 @@ type SyncerConfig = {
   shouldValidateRemoveAfterCheck: boolean;
 }
 
-export const syncer = (actions, config = { shouldInvalidateInsertAfterCheck: true, shouldInvalidateUpdateAfterCheck: true, shouldInvalidateRemoveAfterCheck: true } : SyncerConfig) => async (value: OfflineValue) => {
+export const syncer = (actions, config : SyncerConfig) => async (value: OfflineValue) => {
   const context = actions[value.contextValue];
   
   if (!context) {
