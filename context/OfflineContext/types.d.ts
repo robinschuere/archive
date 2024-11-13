@@ -9,7 +9,9 @@ export type ActionContext = {
   update: (id: string, params: any[]) => Promise<void>;
   remove: (id: string) => Promise<void>;
   insert: (id: string, params: any[]) => Promise<void>;
-  check: (params: any[]) => Promise<Boolean>;
+  checkInsert: (params: any[]) => Promise<Boolean>;
+  checkUpdate: (id: string, params: any[]) => Promise<Boolean>;
+  checkRemove: (id: string) => Promise<Boolean>;
 }
 
 export type OfflineValue = {
