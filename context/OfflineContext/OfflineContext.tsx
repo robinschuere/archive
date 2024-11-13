@@ -52,6 +52,8 @@ export const OfflineProvider = ({ children, actions, syncerConfig = defaultSynce
   
   useEffect(() => {
     const intervalId = setInterval(async () => {
+      if (!window.navigator.onLine) return;
+      
       const stateValueKeys = Object.keys(state).sort();
       if (stateValueKeys.length > 0) {
         try {
