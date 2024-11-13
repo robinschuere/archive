@@ -1,16 +1,3 @@
-// expected types
-type OfflineValue = {
-  contextValue: string;
-  contextAction: 'update' | 'remove' | 'insert';
-  id: string;
-  params: any[];
-  time: number;
-}
-
-type StateValue = {
-  [key: number]: OffLineValue
-}
-
 const actions = {
   todo: {
     get: async (id: string): Promise<Todo> => api.getTodo(id),
