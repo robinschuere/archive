@@ -1,7 +1,18 @@
 import { OfflineProvider } from './OfflineContext';
 import { actions } from './actions';
 
-const ChildComponent = () => {
+const OfflineTodoList = () => {
+  const { state } = useOfflineContext();
+  return Object.entries(state)
+    .filter(s => s.contextValue === 'todo')
+    .map(({ contextValue, contextAction, params, id, time}) => (
+    <span>
+      {contextValue}: {params[0].name} Offline...
+    </span>
+  );
+}
+
+const AddTodo = () => {
   const { dispatch } = useOfflineContext();
   const [formValues, setFormValues] = useState({ name: '' });
   
@@ -21,7 +32,8 @@ const ChildComponent = () => {
 export default function App() {
   return (
     <OfflineProvider actions={actions} syncerInterval={2500}>
-      <button onClick>Add</button>
+      <TodoList />
+      <AddTodo />
     </OfflineProvider>
   );
 }
