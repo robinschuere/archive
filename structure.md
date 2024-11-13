@@ -12,9 +12,8 @@ This readme has some topics which I endured during my experience as a developer.
 |   |   |   |   |   ├──pageA.tsx
 |   |   |   |   ├──pageB
 |   |   |   |   |   ├──pageB.tsx
-|   |   |   |   ├──index.ts
+|   |   |   |   ├──router.tsx
 |   |   |   ├──index.ts
-|   |   |   ├──router.tsx
 |   |   |   ├──styles.ts
 |   |   |   ├──types.d.ts
 |   |   |   ├──tsconfig.json
