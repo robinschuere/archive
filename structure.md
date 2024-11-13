@@ -43,6 +43,7 @@ This readme has some topics which I endured during my experience as a developer.
 |   |   |   |   ├──featureUtilA.test.ts
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
+|   |   ├──index.ts
 |   ├──shared
 |   |   ├──components
 |   |   |   ├──ComponentA
