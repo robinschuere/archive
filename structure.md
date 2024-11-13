@@ -10,6 +10,8 @@ This readme has some topics which I endured during my experience as a developer.
 |   |   |   ├──pages
 |   |   |   |   ├──pageA
 |   |   |   |   |   ├──pageA.tsx
+|   |   |   |   ├──pageB
+|   |   |   |   |   ├──pageB.tsx
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
 |   |   |   ├──router.tsx
@@ -27,7 +29,8 @@ This readme has some topics which I endured during my experience as a developer.
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
 |   |   ├──context
-|   |   |   ├──contextA.tsx
+|   |   |   ├──contextA
+|   |   |   |   ├──contextA.tsx
 |   |   ├──hooks
 |   |   |   ├──featureHookA
 |   |   |   |   ├──featureHookA.ts
@@ -55,6 +58,9 @@ This readme has some topics which I endured during my experience as a developer.
 |   |   |   |   ├──ComponentA.tsx
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
+|   |   ├──context
+|   |   |   ├──contextA
+|   |   |   |   ├──contextA.tsx
 |   |   ├──hooks
 |   |   |   ├──hookA
 |   |   |   |   ├──hookA.ts
@@ -71,6 +77,7 @@ This readme has some topics which I endured during my experience as a developer.
 |   |   |   |   ├──utilA.test.ts
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
+|   |   ├──index.ts
 ├──package.json
 ├──package-lock.json
 ├──tsconfig.base.json
