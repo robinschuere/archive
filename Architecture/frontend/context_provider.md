@@ -18,3 +18,22 @@ const ThemeProvider = ({ children }) => {
 
 export { ThemeContext, ThemeProvider };
 ```
+
+usage
+
+```typescript
+
+const ThemeComponent = () => {
+  const {theme} = useContext(ThemeContext);
+
+  return <SomeOtherLibrary theme={theme} />;
+};
+
+const myPage = () => {
+  return (
+    <ThemeProvider>
+      <ThemeComponent />
+    </ThemeProvider>
+  );
+};
+```
