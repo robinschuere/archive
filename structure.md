@@ -86,6 +86,7 @@ This readme has some topics which I endured during my experience as a developer.
 |   |   |   |   |   ├──index.ts
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
+|   |   |   ├──pipeline
 |   |   |   ├──package.json
 |   |   |   ├──package-lock.json
 |   |   |   ├──styles.ts
