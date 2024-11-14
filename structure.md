@@ -14,9 +14,12 @@ This readme has some topics which I endured during my experience as a developer.
 |   |   |   |   |   ├──pageB.tsx
 |   |   |   |   ├──router.tsx
 |   |   |   ├──index.ts
+|   |   |   ├──package.json
+|   |   |   ├──package-lock.json
 |   |   |   ├──styles.ts
 |   |   |   ├──types.d.ts
 |   |   |   ├──tsconfig.json
+|   |   |   ├──pipeline
 |   |   |   ├──.env
 |   ├──features
 |   |   ├──components
@@ -48,6 +51,46 @@ This readme has some topics which I endured during my experience as a developer.
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
 |   |   ├──index.ts
+|   |   ├──package.json
+|   |   ├──package-lock.json
+|   |   ├──styles.ts
+|   |   ├──types.d.ts
+|   |   ├──tsconfig.json
+|   ├──packages
+|   |   ├──packageA
+|   |   |   ├──components
+|   |   |   |   ├──ComponentA
+|   |   |   |   |   ├──ComponentA.styles.ts | css
+|   |   |   |   |   ├──ComponentA.test.ts
+|   |   |   |   |   ├──types.d.ts
+|   |   |   |   |   ├──ComponentA.tsx
+|   |   |   |   |   ├──index.ts
+|   |   |   |   ├──index.ts
+|   |   |   ├──context
+|   |   |   |   ├──contextA
+|   |   |   |   |   ├──contextA.tsx
+|   |   |   ├──hooks
+|   |   |   |   ├──hookA
+|   |   |   |   |   ├──hookA.ts
+|   |   |   |   |   ├──hookA.test.ts
+|   |   |   |   |   ├──index.ts
+|   |   |   |   ├──index.ts
+|   |   |   ├──services
+|   |   |   |   ├──auth
+|   |   |   |   |   ├──types.d.ts
+|   |   |   |   |   ├──index
+|   |   |   ├──utils
+|   |   |   |   ├──utilA
+|   |   |   |   |   ├──utilA.ts
+|   |   |   |   |   ├──utilA.test.ts
+|   |   |   |   |   ├──index.ts
+|   |   |   |   ├──index.ts
+|   |   |   ├──index.ts
+|   |   |   ├──package.json
+|   |   |   ├──package-lock.json
+|   |   |   ├──styles.ts
+|   |   |   ├──types.d.ts
+|   |   |   ├──tsconfig.json
 |   ├──shared
 |   |   ├──components
 |   |   |   ├──ComponentA
@@ -77,6 +120,11 @@ This readme has some topics which I endured during my experience as a developer.
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
 |   |   ├──index.ts
+|   |   ├──package.json
+|   |   ├──package-lock.json
+|   |   ├──styles.ts
+|   |   ├──types.d.ts
+|   |   ├──tsconfig.json
 ├──package.json
 ├──package-lock.json
 ├──tsconfig.base.json
@@ -93,6 +141,42 @@ When everything is a feature, it is hard to define something that isn't. This al
 
 ### Every feature becomes a shared Component!
 When boundaries are not hard enough or explicitly defined, it becomes clear that a lot of the features are bound to become shared. To counter this, features have to be clearly defined by their creators so that their use has a clear boundary and thus marking it as a feature.
+
+## The main Idea
+
+### Applications
+
+An application is a website / webapplication / mobile application where end-users communicate with.
+
+Applications are deployable by their own standards, to their own environments whenever necessary. Application hold their own package json.
+
+Applications can import from (private or NPM) packages, shared and feature folders as they should be easily deployable.
+
+### Features
+
+A feature is a component / service that operates in its own boundary which developers can use.
+
+A feature can have all information to be self-maintaining (api/components) but the preferred option is a service feature or a component feature. Linking both should happen through an application!
+
+Features cannot be deployed as a package (be it private or NPM) since it can be dependant of other parts of the monorepo code. As such, it is wise to make the feature as self-dependent as possible.
+
+Features can import from (private or NPM) packages and the shared monorepo as they should be easily useable by the Applications.
+
+### Packages
+
+A package is a component / service that operates in its own boundary which developers can use as a (private or NPM) package.
+
+A package should have all information to be self-maintaining (api/components) but the preferred option is a service package or a component package. Linking both should happen through an application or feature or shared component!
+
+Packages can be exposed to the outside world as a (private or NPM) package thus it may not depend on code that is not in the package specific folder. All used code should be in the package!
+
+Packages can import from other (private or NPM) packages.
+
+### Shared
+
+A shared library holds all information that operates on a very basic level which developers can use to build applications and features. It is important to note here that all logical assumptions in the shared library should be that the service, util or component are unit-testable and can be regarded as "dumb" functions so that an easy approach is available for the developer.
+
+The shared library could be deployed as a whole package (be it private or NPM) since it should not be dependant of other parts of code. However, we do not want to expose parts of our code structure.
 
 # Provider-Context Design
 When designing a context to be used as a provider, there is no need to placed them in separate files as this will just complicate things. They are to be used together!
