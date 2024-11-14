@@ -1,5 +1,12 @@
 # Monorepo with feature folder setup
 
+Some thoughts about a specific structure regarding a monorepo with
+
+- applications
+- features
+- shared components
+- exposed packages
+
 ```bash
 ├──src
 |   ├──applications
