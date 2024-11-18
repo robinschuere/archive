@@ -138,15 +138,6 @@ Some thoughts about a specific structure regarding a monorepo with
 ├──gitignore
 ```
 
-## Pitfals
-With every architectural setup come pitfals 
-
-### Everything is a feature!
-When everything is a feature, it is hard to define something that isn't. This also means that the boundaries of the features are clearly defined, but that means some boundaries are to hard and explicitly defined that everything has to be split into smaller feature components. This also means a lot of shared work will be redefined in the feature making the repository even bigger and after a while impossible to create shared components (unless a lot of time is invested)
-
-### Every feature becomes a shared Component!
-When boundaries are not hard enough or explicitly defined, it becomes clear that a lot of the features are bound to become shared. To counter this, features have to be clearly defined by their creators so that their use has a clear boundary and thus marking it as a feature.
-
 ## The main Idea
 
 ### Applications
@@ -184,3 +175,12 @@ A shared library holds all information that operates on a very basic level which
 The shared library could be deployed as a whole package (be it private or NPM) since it should not be dependant of other parts of code. However, we do not want to expose parts of our code structure.
 
 Shared can import from (private or NPM) packages as they are used by the Applications and Features.
+
+## Pitfals
+With every architectural setup come pitfals 
+
+### Everything is a feature!
+When everything is a feature, it is hard to define something that isn't. This also means that the boundaries of the features are clearly defined, but that means some boundaries are to hard and explicitly defined that everything has to be split into smaller feature components. This also means a lot of shared work will be redefined in the feature making the repository even bigger and after a while impossible to create shared components (unless a lot of time is invested)
+
+### Every feature becomes a shared Component!
+When boundaries are not hard enough or explicitly defined, it becomes clear that a lot of the features are bound to become shared. To counter this, features have to be clearly defined by their creators so that their use has a clear boundary and thus marking it as a feature.
