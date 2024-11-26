@@ -41,12 +41,26 @@ const defaultSyncerInterval = 3000
 const defaultStorageKey = 'DEFAULT_OFFLINE_KEY_PROVIDER';
 
 export const OfflineProvider = ({ children, actions, syncerConfig = defaultSyncerConfig, syncerInterval = defaultSyncerInterval, storageKey= defaultStorageKey }) => {
+  const [browserOnline, setBrowserOnline] = useState(window.navigater.onLine);
   const [state, dispatch] = useReducer(reducer(storageKey), getLocalStorageData(storageKey) || {});
   const synchronize = syncer(actions);
+
+  const handleOnlineChange = () => {
+    setOnline(window.navigater.onLine);
+  };
+
+  useEffect(() => {
+    window.addEventListener('online',handleOnlineChange);
+    window.addEventListener('offline',handleOnlineChange);
+    return () => {
+      window.removeEventListener('online', handleOnlineChange);
+      window.removeEventListener('offline', handleOnlineChange);
+    }
+  }, [])
   
   useEffect(() => {
     const intervalId = setInterval(async () => {
-      if (!window.navigator.onLine) return;
+      if (!online) return;
       
       const stateValueKeys = Object.keys(state).sort();
       if (stateValueKeys.length > 0) {
@@ -60,7 +74,10 @@ export const OfflineProvider = ({ children, actions, syncerConfig = defaultSynce
         }
       }
     }, syncerInterval);
-    () => clearInterval(intervalId);
+    
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [saveValues]);
   
   return (
