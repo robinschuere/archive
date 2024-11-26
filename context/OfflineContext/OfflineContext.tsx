@@ -1,4 +1,4 @@
-import { useReducer, useContext, useEffect } from 'react';
+import { useReducer, useContext, useEffect, createContext } from 'react';
 import { syncer } from './syncer';
 
 // get the current data
@@ -39,6 +39,8 @@ const reducer = (key) => (state, action) => {
 const defaultSyncerConfig = { shouldInvalidateInsertAfterCheck: true, shouldInvalidateUpdateAfterCheck: true, shouldInvalidateRemoveAfterCheck: true }
 const defaultSyncerInterval = 3000
 const defaultStorageKey = 'DEFAULT_OFFLINE_KEY_PROVIDER';
+
+const OfflineContext = createContext(null);
 
 export const OfflineProvider = ({ children, actions, syncerConfig = defaultSyncerConfig, syncerInterval = defaultSyncerInterval, storageKey= defaultStorageKey }) => {
   const [browserOnline, setBrowserOnline] = useState(window.navigater.onLine);
@@ -81,7 +83,7 @@ export const OfflineProvider = ({ children, actions, syncerConfig = defaultSynce
   }, [saveValues]);
   
   return (
-    <OfflineContext.Provider value={{ ...state, dispatch }}>
+    <OfflineContext.Provider value={{ ...state, dispatch, online }}>
       {children}
     </OfflineContext.Provider>
   );
