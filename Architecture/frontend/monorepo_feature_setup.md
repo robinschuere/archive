@@ -17,6 +17,9 @@ Some thoughts about a specific structure regarding a monorepo with
 |   |   |   |   ├──pageB
 |   |   |   |   |   ├──pageB.tsx
 |   |   |   |   ├──router.tsx
+|   |   |   ├──config
+|   |   |   |   ├──config.ts
+|   |   |   |   ├──featureFlags.ts
 |   |   |   ├──index.ts
 |   |   |   ├──package.json
 |   |   |   ├──package-lock.json
@@ -130,6 +133,7 @@ Some thoughts about a specific structure regarding a monorepo with
 |   |   ├──styles.ts
 |   |   ├──types.d.ts
 |   |   ├──tsconfig.json
+├──featureFlags.json
 ├──package.json
 ├──package-lock.json
 ├──tsconfig.base.json
@@ -184,3 +188,30 @@ When everything is a feature, it is hard to define something that isn't. This al
 
 ### Every feature becomes a shared Component!
 When boundaries are not hard enough or explicitly defined, it becomes clear that a lot of the features are bound to become shared. To counter this, features have to be clearly defined by their creators so that their use has a clear boundary and thus marking it as a feature.
+
+## Feature flags
+Depending on the mono repo context, some different featureflags are in place to keep everything running correctly.
+
+### What is a feature flag
+A feature flag is a config object value that an application uses to show specific content. It can be that a specific application has some features implemented, but they are not visible yet due to the state of implementation, or state of the application itself.
+
+To counter this, a main file with all feature should be available at root level
+
+```javascript
+// array model:
+const FeatureFlags = {
+  NAME: [NAME, DESCRIPTION],
+}
+
+// object model:
+const FeatureFlags = {
+  NAME: {
+    name: 'NAME',
+    description: '',
+  },
+}
+
+export default FeatureFlags
+```
+
+Applications should then import the specific featureflags in a common context so that each feature depending on these values can request them when necessary.
