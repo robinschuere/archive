@@ -24,7 +24,7 @@ usage
 ```typescript
 
 const ThemeComponent = () => {
-  const {theme} = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   return <SomeOtherLibrary theme={theme} />;
 };
