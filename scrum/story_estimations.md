@@ -1,9 +1,9 @@
 # Story estimations
 
 Estimation (or estimating): 
-  is the process of finding an estimate or approximation, which is a value that is usable for some purpose even if input data may be incomplete, uncertain, or unstable. The value is nonetheless usable because it is derived from the best information available.[1] Typically, estimation involves "using the value of a statistic derived from a sample to estimate the value of a corresponding population parameter".[2] The sample provides information that can be projected, through various formal or informal processes, to determine a range most likely to describe the missing information. An estimate that turns out to be incorrect will be an overestimate if the estimate exceeds the actual result[3] and an underestimate if the estimate falls short of the actual result.
+  is the process of finding an estimate or approximation, which is a value that is usable for some purpose even if input data may be incomplete, uncertain, or unstable. The value is nonetheless usable because it is derived from the best information available. Typically, estimation involves "using the value of a statistic derived from a sample to estimate the value of a corresponding population parameter". The sample provides information that can be projected, through various formal or informal processes, to determine a range most likely to describe the missing information. An estimate that turns out to be incorrect will be an overestimate if the estimate exceeds the actual result and an underestimate if the estimate falls short of the actual result.
 
-The biggest problem regarding story points estimation is that we do not always work with a clean setup to start from. Multiple tasks and errors is what breaks our context protocol and removes us from actively fixing a story. That and the fact that coding on a repository that has a branch in production means we are updating live code and have to make sure nothing breaks during this process. It's like drawing a painting of a house while riding a horse.
+## Estimations and Agile Scrum
 
 The agile community has different ways as to how to estimate this points.
 
