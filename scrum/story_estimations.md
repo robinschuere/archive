@@ -58,5 +58,5 @@ It is only after asking these questions that we can start doing story points.
 ## How to continue
 
 Give yourself 3-6 months to work with the estimations. Nobody is getting it right from the first time.
-Depending on the product and the shifting complexity, you have to redo this cycle many times to come up with a good estimation.
+Depending on the product and the shifting complexity, you have to redo this cycle many times to come up with a good base for doing estimations.
 
