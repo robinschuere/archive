@@ -77,3 +77,40 @@ What If ...
 A story is abandoned during the Active state
 
 - The story status is updated to Canceled
+
+## Extended Story board
+
+|New|In Development|To Merge|Merged|To Test|Tested|To Validate|Validated|To Demo|To Deploy|Deployed|Closed (Completed, Canceled)|
+|--|--|--|--|--|--|--|--|--|--|--|--|
+
+- New: A story is ready to be taken up
+  - a Developer changes the status to `Active` as soon as they start working on it.
+- In Development: A story is actively being worked on
+  - a Developer changes the status to `To Merge` as soon as they completed the story and are awaiting the Peer-review.
+- To Merge: Or To PR, a PR is open to be merged into a specific branch or environment.
+  - a Developer changes the status to `Merged` as soon as the PR is merged.
+- Merged: A story was merged into a specific branch and is ready to be tested
+  - The tester changes the status to `To Test` as soon as they start testing the story.
+- To Test: A story is currently being tested
+  - The tester changes the status to `Tested` as soon as they completed their job.
+- Tested: A story was tested and is ready to be validated
+  - The PO changes the status to `To Validate` as soon as they start validating the story.
+- To Validate: A story is being validated
+  - The PO changes the status to `Validated`.
+- Validated: A story was validated and is ready to be demod
+  - The PO changes the status to `To Demo`.
+- To Demo: A story is ready to be demo'ed to the team
+  - the Scrum Master adds the story to the demo agenda.
+  - After the demo, the PO changes the status to `To Deploy`
+- To Deploy: A story is ready to be deployed
+  - As soon as the next release cycle begins, the code is deployed to the correct environment
+- Deployed: A story was deployed to the correct environments
+  - the PO Changes the status to `Completed`.
+- Closed: A story final state for completion or abandonment.
+
+What If ...
+
+A story is abandoned during the Active state
+
+- The story status is updated to Canceled
+
