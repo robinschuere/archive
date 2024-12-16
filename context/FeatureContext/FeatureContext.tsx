@@ -3,7 +3,7 @@ import { hasFeature } from '@ROOT_FeatureFlags';
 
 const FeatureContext = createContext(null);
 
-export const FeatureProvider = ({ features }) => {  
+const FeatureProvider = ({ features }) => {  
   return (
     <FeatureContext.Provider value={{ features, hasFeature: hasFeature(features) }}>
       {children}
@@ -11,6 +11,8 @@ export const FeatureProvider = ({ features }) => {
   );
 }
 
-export const useFeatureContext = () => {
+const useFeatureContext = () => {
   return useContext(FeatureContext)
 }
+
+export default { FeatureProvider, useFeatureContext };
