@@ -80,22 +80,20 @@ A story is abandoned during the Active state
 
 ## Extended Story board
 
-|New|In Development|To Merge|Merged|To Test|Tested|To Validate|Validated|To Demo|To Deploy|Deployed|Closed (Completed, Canceled)|
-|--|--|--|--|--|--|--|--|--|--|--|--|
+|New|In Development|Merged|In Test|Tested|Validating|Validated|To Demo|To Deploy|Deployed|Closed (Completed, Canceled)|
+|--|--|--|--|--|--|--|--|--|--|--|
 
 - New: A story is ready to be taken up
   - a Developer changes the status to `Active` as soon as they start working on it.
 - In Development: A story is actively being worked on
-  - a Developer changes the status to `To Merge` as soon as they completed the story and are awaiting the Peer-review.
-- To Merge: Or To PR, a PR is open to be merged into a specific branch or environment.
-  - a Developer changes the status to `Merged` as soon as the PR is merged.
+  - a Developer changes the status to `Merged` as soon as the the story is Peer-reviewed and merged to the destination branch.
 - Merged: A story was merged into a specific branch and is ready to be tested
   - The tester changes the status to `To Test` as soon as they start testing the story.
-- To Test: A story is currently being tested
+- In Test: A story is currently being tested
   - The tester changes the status to `Tested` as soon as they completed their job.
 - Tested: A story was tested and is ready to be validated
   - The PO changes the status to `To Validate` as soon as they start validating the story.
-- To Validate: A story is being validated
+- Validating: A story is being validated
   - The PO changes the status to `Validated`.
 - Validated: A story was validated and is ready to be demod
   - The PO changes the status to `To Demo`.
