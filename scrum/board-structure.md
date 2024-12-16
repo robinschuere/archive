@@ -4,8 +4,8 @@ I created 2 boards for working on feature requests and their stories.
 
 ## Feature Board
 
-|To Approve|Approved|In Analysis|Analysed|In Technical Review|To Refine|Refined|Active|Validate|Demo|Closed (Canceled, Completed)|
-|--|--|--|--|--|--|--|--|--|--|--|
+|To Approve|Approved|In Analysis|Analysed|In Technical Review|To Refine|Refined|Active|To Validate|Validating|Demo|Closed (Canceled, Completed)|
+|--|--|--|--|--|--|--|--|--|--|--|--|
 
 - To Approve: A new feature is requested by a stakeholder and should be picked up by the PO
   - Scrum master decides a timeframe to consult PO, Stakeholders and Scrummees to approve the feature
@@ -31,17 +31,20 @@ I created 2 boards for working on feature requests and their stories.
 - Refined: A feature was refined in stories.
   - As soon as one of these stories gets a working status, the status of the feature should be changed to `Active`. Should be automated!
 - Active: A feature is being actively worked on.
-  - As soon as all the stories have a completed state, the status of the feature should be changed to `Validate`. Should be automated!
-- Validate: A feature that has been worked on but still needs to be validated by the stakeholders and PO.
+  - As soon as all the stories have a completed state, the status of the feature should be changed to `To Validate`. Should be automated!
+- To Validate: A feature that has been worked on but still needs to be validated by the stakeholders and PO.
+  - PO changes the status to `Validating` to validate the complete feature.
+- Validating: A feature is being validated
   - Should the feature not be completed (Not enough depth of the story was provided or something else).
-    - PO creates session for story refinement
+    - PO creates session for extra story refinement
     - The team creates new stories to be made with regards to the feature.
     - After the session, the PO changes the status of the feature to `Active`.
   - Should the feature be completed (True Definition of Done).
     - PO creates an appointment for a Demo to all stakeholders and scrummees
     - PO changes the status to `To Demo`.
-- To Demo: A feature is shown through a demo to the different stakeholders and Scrummees
-  - PO changes the status to `Completed`.
+- To Demo: A feature is ready for demo for the different stakeholders and Scrummees
+  - When the feature was completed, but new insights were learned, the status should be changed to `Completed` and a new Feature request should be made.
+  - When the feature was almost complete, but the stakeholders miss something, the missing topics should be re-analysed as to complete the feature. The feature status changes to `Approved` and should be  picked up as soon as possible by an analyst, preferably the one that did the first analysis.
 - Closed: A feature final state for completion or abandonment.
 
 What If ...
@@ -51,6 +54,12 @@ A feature request is abandoned during the Active state:
 - All stories should be cancelled
 - The feature status is updated to Canceled
 - A new feature named rollback feature X should be made to do necessary code cleanup whenever possible.
+
+A feature request is updated during the Active state:
+
+- The update is immediatly communicated to the Scrummees!
+- Stories that are not to be picked up are to be put on-hold as the analysis document is being updated.  
+- The analysis document is updated and refinement sessions are held to communicate the changes, stories that no longer matter are removed and new stories are refined and added to the feature.
 
 ## Simplified Story board
 
