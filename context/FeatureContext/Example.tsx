@@ -1,4 +1,4 @@
-import FeatureProvider from './FeatureContext';
+import { FeatureProvider, useFeatureContext } from './FeatureContext';
 import { FeatureA, FeatureB } from '@features';
 
 import features from './FeatureFlags';
