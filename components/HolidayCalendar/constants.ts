@@ -13,6 +13,7 @@ export const months = [
   'december',
 ];
 
+// The format of holidays = 'day|monthIndex' so januari first is equal to '1|0'.
 export const holidays = [
   '1|0',
   '21|3',
