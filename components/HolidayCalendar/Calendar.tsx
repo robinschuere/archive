@@ -1,20 +1,41 @@
 import { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
-import Day from './Day.tsx';
+import Day from './Day';
+import { maxAmountOfDays, months } from './constants';
 
 const Calendar = () => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [daysOfNoWork, setDaysOfNoWork] = useState([0,6]);
-  const [daysTaken, setDaysTaken] = useState(0);
+  const [daysTaken, setDaysTaken] = useState<string[]>([]);
 
-  const addDay = () => {
-    setDaysTaken((prev) => prev + 1);
+  const toggleDay = (dayMonth: string) => {
+    setDaysTaken((prev) => {
+      if (prev.includes(dayMonth)) {
+        return prev.filter(s => s !== dayMonth);
+      } else {
+        return [...prev, dayMonth];
+      }
+    });
+  };
+
+  const toggleDaysOfNoWork = (day: string) => {
+    const value = parseInt(day, 10);
+    setDaysOfNoWork((prev) => {
+      if (prev.includes(value)) {
+        return prev.filter(s => s !== value);
+      } else {
+        return [...prev, value];
+      }
+    });
+  }
+
+  const handleDaysTakenChange = (e) => {
+    const regex = /[\d\|\,]/g;
+    // we only match on the numeric values, the pipe symbol and the comma symbol. ie. 1|0 which represents the first of januari.
+    const found = e.target.value.match(regex).join('');
+    setDaysTaken(normalized.split(','));
   }
   
-  const removeDay = () => {
-    setDaysTaken((prev) => prev - 1);
-  }
-
   return (
     <div>
       <table>
@@ -33,9 +54,8 @@ const Calendar = () => {
               {[...Array(maxAmountOfDays)].map((_v, day) => (
                 <td>
                   <Day
-                    dayNoWork={dayOfNoWork}
-                    addDay={addDay}
-                    removeDay={removeDay}
+                    daysNoWork={daysOfNoWork}
+                    toggleDay={toggleDay}
                     year={year}
                     month={month}
                     day={day + 1}
@@ -48,18 +68,15 @@ const Calendar = () => {
       </table>
       <div style={{ height: '50px' }} />
       <Container>
-        <Row class="text-center">Holidays taken: {daysTaken}</Row>
+        <Row class="text-center">Holidays taken: {daysTaken.length}</Row>
+        <Row><textarea value={daysTaken} onChange={handleDaysTakenChange} /></Row>
         <Row>
           <div style={{ ...customStyle, 'background-color': 'gray' }}></div>
-          Weekend days
+          Weekend days | not working days
         </Row>
         <Row>
           <div style={{ ...customStyle, 'background-color': 'red' }}></div>
           known official holidays
-        </Row>
-        <Row>
-          <div style={{ ...customStyle, 'background-color': 'pink' }}></div>I do
-          not work on this day
         </Row>
         <Row>
           <div style={{ ...customStyle, 'background-color': 'green' }}></div>
@@ -67,13 +84,12 @@ const Calendar = () => {
         </Row>
         <Row>
           <select
-            value={dayOfNoWork}
+            multiple
+            value={daysOfNoWork}
             onChange={(e) => {
-              console.log(e.target.value);
-              setDayOfNoWork(e.target.value);
+              toggleDaysOfNoWork(e.target.value);
             }}
           >
-            <option value={-1}>No day</option>
             <option value={1}>Monday</option>
             <option value={2}>Tuesday</option>
             <option value={3}>Wednesday</option>
