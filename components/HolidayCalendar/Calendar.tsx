@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import Day from './Day.tsx';
 
-const HolidayCalendar = () => {
+const Calendar = () => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [dayOfNoWork, setDayOfNoWork] = useState(-1);
   const [daysTaken, setDaysTaken] = useState(0);
@@ -103,4 +103,4 @@ const HolidayCalendar = () => {
   );
 };
 
-export default MyHolidayCalendar
+export default Calendar
