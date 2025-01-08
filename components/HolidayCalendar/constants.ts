@@ -1,3 +1,5 @@
+export const maxAmountOfDays = 31;
+
 export const months = [
   'januari',
   'februari',
