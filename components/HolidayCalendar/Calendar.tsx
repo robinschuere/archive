@@ -4,23 +4,8 @@ import Day from './Day.tsx';
 
 const Calendar = () => {
   const [year, setYear] = useState(new Date().getFullYear());
-  const [dayOfNoWork, setDayOfNoWork] = useState(-1);
+  const [daysOfNoWork, setDaysOfNoWork] = useState([0,6]);
   const [daysTaken, setDaysTaken] = useState(0);
-  const maxAmountOfDays = 31;
-  const months = [
-    'januari',
-    'februari',
-    'march',
-    'april',
-    'may',
-    'june',
-    'july',
-    'august',
-    'september',
-    'october',
-    'november',
-    'december',
-  ];
 
   const addDay = () => {
     setDaysTaken((prev) => prev + 1);
