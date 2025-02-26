@@ -37,3 +37,5 @@ const myPage = () => {
   );
 };
 ```
+!Disclaimer
+This will change in React19 (https://medium.com/@aalbertini95_90842/a-comparative-look-at-how-to-use-the-context-api-in-react-18-vs-react-19-898cb2a367ff)
