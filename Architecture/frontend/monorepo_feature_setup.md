@@ -13,9 +13,11 @@ Some thoughts about a specific structure regarding a monorepo with
 |   |   ├──applicationA
 |   |   |   ├──pages
 |   |   |   |   ├──pageA
-|   |   |   |   |   ├──pageA.tsx
+|   |   |   |   |   |   ├──hooks
+|   |   |   |   |   ├──index.tsx
 |   |   |   |   ├──pageB
-|   |   |   |   |   ├──pageB.tsx
+|   |   |   |   |   |   ├──hooks
+|   |   |   |   |   ├──index.tsx
 |   |   |   |   ├──router.tsx
 |   |   |   ├──config
 |   |   |   |   ├──config.ts
@@ -102,29 +104,41 @@ Some thoughts about a specific structure regarding a monorepo with
 |   ├──shared
 |   |   ├──components
 |   |   |   ├──ComponentA
+|   |   |   |   ├──mappers
+|   |   |   |   |   ├──index.ts
+|   |   |   |   ├──helpers
+|   |   |   |   |   ├──checkComponentMinimalRequirements.ts
+|   |   |   |   |   ├──index.ts
 |   |   |   |   ├──ComponentA.styles.ts | css
 |   |   |   |   ├──ComponentA.test.ts
-|   |   |   |   ├──types.d.ts
+|   |   |   |   ├──types|interfaces.d.ts
 |   |   |   |   ├──ComponentA.tsx
+|   |   |   |   ├──EmptyState.tsx
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
 |   |   ├──context
-|   |   |   ├──contextA
-|   |   |   |   ├──contextA.tsx
+|   |   |   ├──UseContextA
+|   |   |   |   ├──useContextA.ts
+|   |   |   |   ├──useContextA.test.ts
+|   |   |   |   ├──types|interfaces.d.ts
+|   |   |   |   ├──index.ts
 |   |   ├──hooks
-|   |   |   ├──hookA
-|   |   |   |   ├──hookA.ts
-|   |   |   |   ├──hookA.test.ts
+|   |   |   ├──UseHookA
+|   |   |   |   ├──useHookA.ts
+|   |   |   |   ├──useHookA.test.ts
+|   |   |   |   ├──types|interfaces.d.ts
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
 |   |   ├──services
 |   |   |   ├──auth
-|   |   |   |   ├──types.d.ts
+|   |   |   |   ├──auth.test.ts
+|   |   |   |   ├──types|interfaces.d.ts
 |   |   |   |   ├──index
 |   |   ├──utils
 |   |   |   ├──utilA
 |   |   |   |   ├──utilA.ts
 |   |   |   |   ├──utilA.test.ts
+|   |   |   |   ├──types|interfaces.d.ts
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
 |   |   ├──index.ts
@@ -152,9 +166,84 @@ The shared library could be deployed as a whole package (be it private or NPM) s
 
 Shared can import from (private or NPM) packages and the shared folders.
 
+#### Components
+
+Shared components are components which are to be used inside pages and features. These components have to be as "dumb" as possible.
+
+The shared components will get some hard requirements:
+
+- Components are (almost) always dumb and do not keep state or side-effects inside. They should be as controllable as possible.
+- Components have a seperate styles file to keep all their styles in.
+- Components have an EmptyState Component which will be returned when the minimal requirements of that component were not met (see helpers/checkComponentMinimalRequirements.ts).
+- Components have interfaces|types (props) which are clearly stated inside the interfaces|types.d.ts file
+- Components have a minimal test setup where the component is tested for specific behaviours
+- An index file is returned which acts as an entry point for exporting types, styles and the component.
+
+```typescript
+export type { ComponentAProps } from './types|interfaces.d.ts';
+
+export { checkComponentMinimalRequirements } from './helpers/checkComponentMinimalRequirements';
+
+import ComponentA from './ComponentA';
+import EmptyState from './EmptyState';
+
+export const ComponentA;
+export const ComponentAEmptyState = EmptyStatec;
+
+export default ComponentA (props: ComponentAProps) => {
+  if (checkComponentMinimalRequirements(props)) {
+    return <ComponentA {...props} />
+  }
+  return <EmptyState />
+}
+```
+
+#### Contexts 
+
+Shared contexts are contexts which are to be used inside pages and features. 
+
+The shared contexts will get some hard requirements:
+
+- Contexts will throw assertion errors whenever issues arise.
+- Contexts have interfaces|types (props) which are clearly stated inside the interfaces|types.d.ts file
+- Contexts have a minimal test setup where the context is tested
+- An index file is returned which acts as an entry point for exporting types and the context.
+
+```typescript
+export type { UseContextAProps } from './types|interfaces.d.ts';
+
+export useContextA from './useContextA';
+```
+
+#### Hooks 
+
+Shared hooks are hooks which are to be used inside pages and features. 
+
+The shared hooks will get some hard requirements:
+
+- Hooks will throw assertion errors whenever issues arise.
+- Hooks have interfaces|types (props) which are clearly stated inside the interfaces|types.d.ts file
+- Hooks have a minimal test setup where the hook is tested
+- An index file is returned which acts as an entry point for exporting types and the hook.
+
+```typescript
+export type { UseHookAProps } from './types|interfaces.d.ts';
+
+export useHookA from './useHookA';
+```
+
+#### Services
+
+Shared services are services which are to be used inside pages and features.
+
+Services are functionalities which will help linking components and data together. They act as a bridge to get everything running smoothly. Services may look like:
+
+- api client
+- specific managers
+
 ### Features folder
 
-A feature is a component / service that operates in its own boundary which developers can use. A feature is more complex then a shared component as it ties logic and components together.
+A feature is a component that operates in its own boundary which developers can use. A feature is more complex then a shared component as it ties logic and specific components together. It can be as big as a complete page view
 
 A feature cannot be deployed as a whole package (be it private or NPM) since it is depending on monorepo code.
 
