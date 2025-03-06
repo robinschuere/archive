@@ -162,13 +162,13 @@ Some thoughts about a specific structure regarding a monorepo with
 
 A shared folder holds all information that operates on a very basic level which developers can use to build applications and features. It is important to note here that all logical assumptions in the shared library should be that the service, util or component are unit-testable and can be regarded as "dumb" functions so that an easy approach is available for the developer.
 
-The shared library could be deployed as a whole package (be it private or NPM) since it should not be depending on other parts of code. However, we do not want to expose parts of the monorepo code structure.
+We do not want to deploy the shared library as a seperate package since it will contain a lot of the monorepo logic.
 
-Shared can import from (private or NPM) packages and the shared folders.
+The shared library can import from (private or NPM) packages and the shared folders.
 
 #### Components
 
-Shared components are components which are to be used inside pages and features. These components have to be as "dumb" as possible.
+Shared components are components which are to be used inside applications and features. These components have to be as "dumb" as possible.
 
 The shared components will get some hard requirements:
 
@@ -200,7 +200,7 @@ export default ComponentA (props: ComponentAProps) => {
 
 #### Contexts 
 
-Shared contexts are contexts which are to be used inside pages and features. 
+Shared contexts are contexts which are to be used inside applications and features. 
 
 The shared contexts will get some hard requirements:
 
@@ -217,7 +217,7 @@ export useContextA from './useContextA';
 
 #### Hooks 
 
-Shared hooks are hooks which are to be used inside pages and features. 
+Shared hooks are hooks which are to be used inside applications and features. 
 
 The shared hooks will get some hard requirements:
 
@@ -234,7 +234,7 @@ export useHookA from './useHookA';
 
 #### Services
 
-Shared services are services which are to be used inside pages and features.
+Shared services are services which are to be used inside applications and features.
 
 Services are functionalities which will help linking components and data together. They act as a bridge to get everything running smoothly. Services may look like:
 
@@ -245,17 +245,17 @@ Services are functionalities which will help linking components and data togethe
 
 A feature is a component that operates in its own boundary which developers can use. A feature is more complex then a shared component as it ties logic and specific components together. It can be as big as a complete page view
 
-A feature cannot be deployed as a whole package (be it private or NPM) since it is depending on monorepo code.
+A feature cannot be deployed as a seperate package (be it private or NPM) since it is depending on monorepo code.
 
-Features can import from (private or NPM) packages, shared and feature folders.
+The features library can import from (private or NPM) packages, shared and feature folders.
 
 ### Packages folder
 
 A package is a component / service that operates in its own boundary which developers can use as a (private or NPM) package.
 
-A package should have all information to be self-maintaining (api/components).
+A package should have all information to be self-maintaining (api/components/services/types/...).
 
-Packages can be exposed to the outside world as a (private or NPM) package thus it may not depend on code that is not in the package specific folder. 
+Packages can be exposed to the outside world as a (private or NPM) package thus it may not depend on code that is not in the package specific folder.
 
 Packages can import from other (private or NPM) packages. The amount of dependencies should remain at a low amount to easily maintain the package.
 
@@ -263,7 +263,7 @@ Packages can import from other (private or NPM) packages. The amount of dependen
 
 An application is a website / webapplication / mobile application where end-users communicate with.
 
-Applications are deployable by their own standards, to their own environments whenever necessary. Application hold their own package json.
+Applications are deployable by their own standards, to their own environments whenever necessary. Application hold their own package json and environment configuration.
 
 Applications can import from (private or NPM) packages, shared and feature folders.
 
