@@ -107,12 +107,14 @@ Some thoughts about a specific structure regarding a monorepo with
 |   |   |   |   ├──mappers
 |   |   |   |   |   ├──index.ts
 |   |   |   |   ├──helpers
-|   |   |   |   |   ├──checkComponentMinimalRequirements.ts
+|   |   |   |   |   ├──showRequirementError.ts
+|   |   |   |   |   ├──showEmptyState.ts
 |   |   |   |   |   ├──index.ts
 |   |   |   |   ├──ComponentA.styles.ts | css
 |   |   |   |   ├──ComponentA.test.ts
 |   |   |   |   ├──types|interfaces.d.ts
 |   |   |   |   ├──ComponentA.tsx
+|   |   |   |   ├──RequirementError.tsx
 |   |   |   |   ├──EmptyState.tsx
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
@@ -185,7 +187,8 @@ The shared components will get some hard requirements:
 
 - Components are (almost) always dumb and do not keep state or side-effects inside. They should be as controllable as possible.
 - Components have a seperate styles file to keep all their styles in.
-- Components have an EmptyState Component which will be returned when the minimal requirements of that component were not met (see helpers/checkComponentMinimalRequirements.ts).
+- Components have an RequirementError Component which will be returned when the component meets the requirements of an incomplete component (see helpers/showRequirementError.ts).
+- Components may have an EmptyState Component which will be returned when the component meets the requirements of an empty component (see helpers/showEmptyState.ts).
 - Components have interfaces|types (props) which are clearly stated inside the interfaces|types.d.ts file
 - Components have a minimal test setup where the component is tested for specific behaviours
 - An index file is returned which acts as an entry point for exporting types, styles and the component.
@@ -193,16 +196,21 @@ The shared components will get some hard requirements:
 ```typescript
 export type { ComponentAProps } from './types|interfaces.d.ts';
 
-export { checkComponentMinimalRequirements } from './helpers/checkComponentMinimalRequirements';
+export { showRequirementError } from './helpers/showRequirementError';
+export { showEmptyState } from './helpers/showEmptyState';
 
 export ComponentA from './ComponentA';
 export EmptyState from './EmptyState';
+export RequirementError from './RequirementError';
 
-export default ComponentA (props: ComponentAProps) => {
-  if (checkComponentMinimalRequirements(props)) {
-    return <ComponentA {...props} />
+export default CheckedComponent (props: ComponentAProps) => {
+  if (showrequirementError(props)) {
+    return <RequirementError />
   }
-  return <EmptyState />
+  if (showEmptyState(props)) {
+    return <EmptyState />
+  }
+  return <ComponentA {...props} />
 }
 ```
 
@@ -245,25 +253,33 @@ Shared layouts are components that, based on a specific configuration will retur
 
 The shared layout will get some hard requirements:
 
-- Layouts are (almost) always dumb and do not keep state or side-effects inside. They should be as controllable as possible through their configuration and hidevalues.
+- Layouts are (almost) always dumb and do not keep state or side-effects inside. They should be as controllable as possible through their configuration props.
 - Layouts have a seperate styles file to keep all their styles in.
-- layouts have an ErrorConfiguration Component which will be returned when the given configuration contains errors (see helpers/checkConfiguration.ts).
+- Layouts have an RequirementError Component which will be returned when the component meets the requirements of an incomplete component (see helpers/showRequirementError.ts).
+- Layouts may have an EmptyState Component which will be returned when the component meets the requirements of an empty component (see helpers/showEmptyState.ts).
 - layouts have interfaces|types (props) which are clearly stated inside the interfaces|types.d.ts file
 - An index file is returned which acts as an entry point for exporting types, styles and the layout.
+
+As you may notice, a layout looks a lot like a component.
 
 ```typescript
 export type { LayoutAProps } from './types|interfaces.d.ts';
 
-export { checkConfiguration } from './helpers/checkConfiguration';
+export { showRequirementError } from './helpers/showRequirementError';
+export { showEmptyState } from './helpers/showEmptyState';
 
 export LayoutA from './LayoutA';
-export ConfigurationError from './ConfigurationError';
+export EmptyState from './EmptyState';
+export RequirementError from './RequirementError';
 
-export default CheckedLayout (props: LayoutAProps) => {
-  if (checkConfiguration(props)) {
-    return <LayoutA {...props} />
+export default CheckedLayout (props: ComponentAProps) => {
+  if (showRequirementError(props)) {
+    return <RequirementError />
   }
-  return <ConfigurationError />
+  if (showEmptyState(props)) {
+    return <EmptyState />
+  }
+  return <ComponentA {...props} />
 }
 ```
 
