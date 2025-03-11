@@ -129,6 +129,17 @@ Some thoughts about a specific structure regarding a monorepo with
 |   |   |   |   ├──types|interfaces.d.ts
 |   |   |   |   ├──index.ts
 |   |   |   ├──index.ts
+|   |   ├──layouts
+|   |   |   ├──layoutA
+|   |   |   |   ├──helpers
+|   |   |   |   |   ├──checkConfiguration.ts
+|   |   |   |   |   ├──index.ts
+|   |   |   |   ├──LayoutA.styles.ts | css
+|   |   |   |   ├──types|interfaces.d.ts
+|   |   |   |   ├──ConfigurationError.ts
+|   |   |   |   ├──LayoutA.ts
+|   |   |   |   ├──index.ts
+|   |   |   ├──index.ts
 |   |   ├──services
 |   |   |   ├──auth
 |   |   |   |   ├──auth.test.ts
@@ -184,11 +195,8 @@ export type { ComponentAProps } from './types|interfaces.d.ts';
 
 export { checkComponentMinimalRequirements } from './helpers/checkComponentMinimalRequirements';
 
-import ComponentA from './ComponentA';
-import EmptyState from './EmptyState';
-
-export const ComponentA;
-export const ComponentAEmptyState = EmptyStatec;
+export ComponentA from './ComponentA';
+export EmptyState from './EmptyState';
 
 export default ComponentA (props: ComponentAProps) => {
   if (checkComponentMinimalRequirements(props)) {
@@ -230,6 +238,33 @@ The shared hooks will get some hard requirements:
 export type { UseHookAProps } from './types|interfaces.d.ts';
 
 export useHookA from './useHookA';
+```
+
+#### Layouts
+Shared layouts are components that, based on a specific configuration will return combinations of components.
+
+The shared layout will get some hard requirements:
+
+- Layouts are (almost) always dumb and do not keep state or side-effects inside. They should be as controllable as possible through their configuration and hidevalues.
+- Layouts have a seperate styles file to keep all their styles in.
+- layouts have an ErrorConfiguration Component which will be returned when the given configuration contains errors (see helpers/checkConfiguration.ts).
+- layouts have interfaces|types (props) which are clearly stated inside the interfaces|types.d.ts file
+- An index file is returned which acts as an entry point for exporting types, styles and the layout.
+
+```typescript
+export type { LayoutAProps } from './types|interfaces.d.ts';
+
+export { checkConfiguration } from './helpers/checkConfiguration';
+
+export LayoutA from './LayoutA';
+export ConfigurationError from './ConfigurationError';
+
+export default CheckedLayout (props: LayoutAProps) => {
+  if (checkConfiguration(props)) {
+    return <LayoutA {...props} />
+  }
+  return <ConfigurationError />
+}
 ```
 
 #### Services
