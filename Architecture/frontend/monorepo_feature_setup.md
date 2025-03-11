@@ -173,11 +173,19 @@ Some thoughts about a specific structure regarding a monorepo with
 
 ### Shared folder
 
-A shared folder holds all information that operates on a very basic level which developers can use to build applications and features. It is important to note here that all logical assumptions in the shared library should be that the service, util or component are unit-testable and can be regarded as "dumb" functions so that an easy approach is available for the developer.
+A shared folder holds all information that operates on a very basic level which developers can use to build applications and features. It is important to note here that all logical assumptions in the shared library should be that the service, util or component are unit-testable and can be regarded as "dumb" functions so that an easy approach is always available for the developer.
 
 We do not want to deploy the shared library as a seperate package since it will contain a lot of the monorepo logic.
 
 The shared library can import from (private or NPM) packages and the shared folders.
+
+The shared folder will have:
+
+- Components
+- Contexts
+- Hooks
+- Layouts
+- Services
 
 #### Components
 
@@ -216,7 +224,7 @@ export default CheckedComponent (props: ComponentAProps) => {
 
 #### Contexts 
 
-Shared contexts are contexts which are to be used inside applications and features. 
+Shared contexts are contexts which are to be used inside applications and features.
 
 The shared contexts will get some hard requirements:
 
@@ -233,7 +241,7 @@ export useContextA from './useContextA';
 
 #### Hooks 
 
-Shared hooks are hooks which are to be used inside applications and features. 
+Shared hooks are hooks which are to be used inside applications and features.
 
 The shared hooks will get some hard requirements:
 
@@ -318,8 +326,20 @@ Applications are deployable by their own standards, to their own environments wh
 
 Applications can import from (private or NPM) packages, shared and feature folders.
 
+Since we are in the React space, and as such talking about web components, an application main entry should always be the pages/router.ts file which in turn points to the different pages.
+In here we also want to keep the application space as simple and as logic as possible. There should be no use for a components folder, as a component should be registered as either a shared component, shared feature or package. It should be possible to not create components inside the application.
+
 ## Pitfals
-With every architectural setup come pitfals 
+With every architectural setup come pitfals
+
+## No components inside the application folder?
+The issues with a monorepo is that a lot of functionality is bound to be recreated in infinity. As code developers and maintainers, this is the biggest issue of an application.
+A hard rule of dropping a components folder will likely resolve in a Parts folder where a page is split up in "parts".
+
+The issue herein lies that many of these components will actually be views or layouts. Thus, discussion and communication must rise to determine if an Application Component really is an Application Component and may then be moved to the corresponding folder.
+Since monorepo code mostly resolves around the same look and feel, we must take into account that to make everything look and feel the same, we must point to the same components. 
+
+This will require heavy knowledge of the code base but also requests for lead developers that keep the code sanity in check.
 
 ### Everything is a feature!
 When everything is a feature, it is hard to define something that isn't. This also means that the boundaries of the features are clearly defined, but that means some boundaries are to hard and explicitly defined that everything has to be split into smaller feature components. This also means a lot of shared work will be redefined in the feature making the repository even bigger and after a while impossible to create shared components (unless a lot of time is invested)
