@@ -251,15 +251,15 @@ const localeCurrencies: Record<string, string> = {
 };
 
 function getCountryCode(localeString) {
-    let localeParts = localeString.split("_");
-    if (localeParts.length === 2) {
-        return localeParts[1];
-    }
-    localeParts = localeString.split("-");
-    if (localeParts.length === 2) {
-        return localeParts[1];
-    }
-    return localeString;
+  let localeParts = localeString.split("_");
+  if (localeParts.length === 2) {
+      return localeParts[1];
+  }
+  localeParts = localeString.split("-");
+  if (localeParts.length === 2) {
+      return localeParts[1];
+  }
+  return localeString;
 }
 
 export function getCurrencyCode(locale?: string) {
