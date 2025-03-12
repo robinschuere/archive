@@ -1,4 +1,4 @@
-const localeCurrencies = {
+const localeCurrencies: Record<string, string> = {
   AD: 'EUR',
   AE: 'AED',
   AF: 'AFN',
@@ -256,7 +256,7 @@ function getCountryCode(localeString) {
         return localeParts[1];
     }
     localeParts = localeString.split("-");
-    if (components.length == 2) {
+    if (localeParts.length === 2) {
         return localeParts[1];
     }
     return localeString;
@@ -264,7 +264,7 @@ function getCountryCode(localeString) {
 
 export function getCurrencyCode(locale?: string) {
   const userLocale = locale || navigator.language || 'en-US';
-  const countryCode = getCountryCode(locale).toUpperCase();
+  const countryCode = getCountryCode(userLocale).toUpperCase();
 
   if (localeCurrencies[countryCode]) {
     return localeCurrencies[countryCode];
