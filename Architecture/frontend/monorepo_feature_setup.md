@@ -33,6 +33,8 @@ Some thoughts about a specific structure regarding a monorepo with
 |   ├──features
 |   |   ├──components
 |   |   |   ├──FeatureComponent
+|   |   |   |   ├──hooks
+|   |   |   |   |   ├──index.ts
 |   |   |   |   ├──FeatureComponent.styles
 |   |   |   |   ├──FeatureComponent.test
 |   |   |   |   ├──FeatureComponent
