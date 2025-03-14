@@ -30,10 +30,10 @@ const setCachedValue = (key: string, data: [], refreshAfter?: number) => {
   setLocalStorageData(key, cachedValues[key]);
 }
 
-const refreshData = async (key: string): Promise<void> => {
+const refreshData = async (key: string, overrule?: boolean): Promise<void> => {
   // get the local stored data first before retrieving the new data.
   const localStorageData = getLocalStorageData(key);
-  if (localStorageData) {
+  if (!overrule && localStorageData) {
     if (localStorageData.data.length > 0 && new Date().valueOf() < localStorageData.refreshAfter) {
       setCachedValue(key, localStorageData.data, localStorage.refreshData);
       return;
@@ -79,3 +79,10 @@ export const checkData = () => {
       setTimeout(() => getData(key), 1);
     });
 }
+
+export const hardRefresh = () => {
+  Object.keys(cachedValues).forEach((key) => {
+     setTimeout(() => refreshData(key, true), 1);
+  })
+};
+  
