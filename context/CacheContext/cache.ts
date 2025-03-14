@@ -85,3 +85,10 @@ export const refreshData = () => {
   })
 };
   
+export const getCache = () => {
+  const result: Record<string, any[]> = {};
+  return Object.keys(cachedValues).forEach((key) => {
+    result[key] = cachedValues[key].data;
+  })
+  return result;
+}
