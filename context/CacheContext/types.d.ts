@@ -1,7 +1,7 @@
 type DataConfig = {
   strategy: CacheStrategy;
   get: () => Promise<any>;
-  onError: () => void;
+  onError?: (ex: unknown) => Promise<void>;
   cacheTimeInMs: number;
 }
 
