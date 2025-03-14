@@ -30,7 +30,7 @@ const setCachedValue = (key: string, data: [], refreshAfter?: number) => {
   setLocalStorageData(key, cachedValues[key]);
 }
 
-const refreshData = async (key: string, overrule?: boolean): Promise<void> => {
+const setDataFromLocalStorageOrRequest = async (key: string, overrule?: boolean): Promise<void> => {
   // get the local stored data first before retrieving the new data.
   const localStorageData = getLocalStorageData(key);
   if (!overrule && localStorageData) {
@@ -53,10 +53,9 @@ const refreshData = async (key: string, overrule?: boolean): Promise<void> => {
 }
 
 export const getData = async (key: string) => {
-  const { refreshAfter, data, get, onError } = getCachedData(key);
-  if (new Date().valueOf() > refreshAfter || data.length === 0) {
-    await refreshData(key);
-    return getData(key);
+  const { data } = getCachedData(key);
+  if (data.length === 0) {
+    setTimeout(() => setDataFromLocalStorageOrRequest(key), 1);
   }
   return data;
 }
@@ -68,7 +67,7 @@ export const initialize = (dataConfig: CachedDataConfig) => {
       ...dataConfig[key],
       refreshAfter: new Date().valueOf() + dataConfig[key].cacheTimeInMs,
     };
-    setTimeout(() => refreshData(key), 1);
+    setTimeout(() => setDataFromLocalStorageOrRequest(key), 1);
   });
 }
 
@@ -76,13 +75,13 @@ export const checkData = () => {
   Object.keys(cachedValues)
     .filter(key => new Date().valueOf() > cachedValues[key].refreshAfter)
     .forEach(key => {
-      setTimeout(() => getData(key), 1);
+      setTimeout(() => setDataFromLocalStorageOrRequest(key, true), 1);
     });
 }
 
-export const hardRefresh = () => {
+export const refreshData = () => {
   Object.keys(cachedValues).forEach((key) => {
-     setTimeout(() => refreshData(key, true), 1);
+     setTimeout(() => setDataFromLocalStorageOrRequest(key, true), 1);
   })
 };
   
