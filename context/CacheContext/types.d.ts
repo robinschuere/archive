@@ -5,7 +5,7 @@ type DataConfig = {
   cacheTimeInMs: number;
 }
 
-type DataValue = DataConfig & {
+export type DataValue = DataConfig & {
   refreshAfter: number;
 }
 
