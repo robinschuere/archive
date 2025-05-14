@@ -1,6 +1,6 @@
 type GroupCompetencePreference = {
   ages: number[];
-  parts: number[][];
+  ageParts: number[][];
 };
 
 type PersonCompetencePreference = {
@@ -8,10 +8,9 @@ type PersonCompetencePreference = {
   agePart: number;
 };
 
-type Competence<T> = {
+type Competence<T> = T & {
   topic: string;
   name: string;
-  at: T;
 };
 
 type PersonCompetence = {
