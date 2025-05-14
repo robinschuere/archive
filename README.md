@@ -18,7 +18,7 @@ return new Promise((resolve, reject) => {
   if (codeBlock.isTested) {
     resolve('Yes it is');
   } else {
-    reject('No, it wasn't');
+    reject("No, it wasn't. You might want to double-check what you are copying...");
   }
 })
 ```
