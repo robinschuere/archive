@@ -23,11 +23,13 @@ export const calculatePersonValues = (
   competences.forEach(({ topic, name, at }) => {
     let isCompletedByPerson = false;
     const gridValues = definedAges.map(({ age, groupName, agePart }) => {
+      let isCompletedNow = false;
       if (
         person.competences.find(
           s => s.name === name && s.topic === topic && s.at.age === age && s.at.agePart === agePart
         )
       ) {
+        isCompletedNow = true;
         isCompletedByPerson = true;
       }
       if (at.ages.includes(age)) {
@@ -37,6 +39,7 @@ export const calculatePersonValues = (
           agePart,
           color: 'green',
           completed: isCompletedByPerson,
+          isDisabled: isCompletedByPerson && !isCompletedNow,
         };
       }
       let color = 'purple';
@@ -55,6 +58,7 @@ export const calculatePersonValues = (
         agePart,
         color,
         completed: isCompletedByPerson,
+        isDisabled: !!isCompletedByPerson,
       };
     });
     const index = topicsAndCompetences.findIndex(s => s.topic === topic);
