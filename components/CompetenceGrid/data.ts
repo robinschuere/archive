@@ -1,3 +1,10 @@
+import type {
+  AgeAndGroup,
+  PersonCompetence,
+  Competence,
+  GroupCompetencePreference,
+} from "./types";
+
 export const ageAndGroups: AgeAndGroup[] = [
   { ages: [6, 7], name: 'U08' },
   { ages: [8, 9], name: 'U10' },
