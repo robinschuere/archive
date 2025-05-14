@@ -1,5 +1,6 @@
 import { ageAndGroups, makebaCompetences, person } from './data';
 import { calculatePersonValues } from './calculatePersonValues';
+import CompetenceGrid from './CompetenceGrid';
 
 const Page = () => {
   const [selectedAge, setSelectedAge] = useState('ALL');
