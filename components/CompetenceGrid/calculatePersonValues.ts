@@ -1,7 +1,11 @@
 import { PersonCompetence, Competence, AgeAndGroup } from './types';
 import { partsPerAge } from './constants';
 
-export const calculatePersonValues = (person: PersonCompetence, competences: Competence[], groups: AgeAndGroup[]) => {
+export const calculatePersonValues = (
+  person: PersonCompetence,
+  competences: Competence<GroupCompetencePreference>[],
+  groups: AgeAndGroup[]
+) => {
   const definedAges: DefinedAgeCompetence[] = [];
   groups.forEach(group => {
     group.ages.forEach(age => {
@@ -21,7 +25,7 @@ export const calculatePersonValues = (person: PersonCompetence, competences: Com
     const gridValues = definedAges.map(({ age, groupName, agePart }) => {
       if (
         person.competences.find(
-          s => s.name === name && s.topic === topic && s.at.age === age && s.at.parts[0] === agePart
+          s => s.name === name && s.topic === topic && s.at.age === age && s.at.agePart === agePart
         )
       ) {
         isCompletedByPerson = true;
