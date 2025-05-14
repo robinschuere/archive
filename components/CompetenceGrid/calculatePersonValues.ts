@@ -34,8 +34,8 @@ export const calculatePersonValues = (
       }
       const ageIndex = ages.findIndex(s => s === age);
       if (ageIndex > -1 && ageParts[ageIndex].includes(agePart)) {
-        preferredAge = age;
-        preferredAgePart = agePart;
+        preferredAge = preferredAge || age;
+        preferredAgePart = preferredAgePart || agePart;
         return {
           groupName,
           age,
@@ -88,12 +88,26 @@ export const calculatePersonValues = (
   });
 
   if (selectedGroup !== ALL) {
+    const group = groups.find(s => s.name === selectedGroup);
+    if (!group) {
+      return { topicsAndCompetences };
+    }
     const filteredTopicsAndCompetences = topicsAndCompetences
       .filter(s => !s.completed)
       .map(topicAndCompetences => {
         return {
           ...topicAndCompetences,
-          competences: topicAndCompetences.competences.filter(s => !s.completed),
+          competences: topicAndCompetences.competences.filter(s => {
+            // we do not show completed tracks!
+            if (s.completed) {
+              return false;
+            }
+            // tracks that are not completed yet (and shouldn't at a given age are not displayed)
+            if (!s.completed && Math.min(...group.ages) < s.preferredAge) {
+              return false;
+            }
+            return true;
+          }),
         };
       });
 

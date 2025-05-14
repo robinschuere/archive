@@ -8,7 +8,6 @@ import { ALL } from './constants';
 
 const Page = () => {
   const [selectedAge, setSelectedAge] = useState(ALL);
-  const groups = ageAndGroups.filter(s => (selectedAge === ALL ? true : s.name === selectedAge));
   const { topicsAndCompetences } = calculatePersonValues(person, competences, ageAndGroups, selectedAge);
   return (
     <div style={{ height: '100%', width: '100%' }}>
@@ -31,7 +30,7 @@ const Page = () => {
           ))}
         </select>
       </div>
-      <CompetenceGrid topicsAndCompetences={topicsAndCompetences} groups={groups} />
+      <CompetenceGrid topicsAndCompetences={topicsAndCompetences} groups={ageAndGroups} />
     </div>
   );
 };

@@ -1,3 +1,4 @@
+// Example: { ages: [7,8], ageParts: [[1,2,3],[1,2,3]]}
 type GroupCompetencePreference = {
   ages: number[];
   ageParts: number[][];
