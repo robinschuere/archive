@@ -39,12 +39,16 @@ type CompetenceCellValue = {
   isDisabled: boolean;
 };
 
+type CellCompetence = {
+  name: string;
+  gridValues: CompetenceCellValue[];
+  completed: boolean;
+  preferredAge: number;
+  preferredAgePart: number;
+};
+
 type TableTopic = {
   topic: string;
   completed: boolean;
-  competences: {
-    name: string;
-    gridValues: CompetenceCellValue[];
-    completed: boolean;
-  }[];
+  competences: CellCompetence[];
 };

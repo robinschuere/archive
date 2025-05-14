@@ -22,6 +22,8 @@ export const calculatePersonValues = (
   const topicsAndCompetences: TableTopic[] = [];
   competences.forEach(({ topic, name, ages, ageParts }) => {
     let isCompletedByPerson = false;
+    let preferredAge = 0;
+    let preferredAgePart = 0;
     const gridValues = definedAges.map(({ age, groupName, agePart }) => {
       let isCompletedNow = false;
       if (
@@ -32,6 +34,8 @@ export const calculatePersonValues = (
       }
       const ageIndex = ages.findIndex(s => s === age);
       if (ageIndex > -1 && ageParts[ageIndex].includes(agePart)) {
+        preferredAge = age;
+        preferredAgePart = agePart;
         return {
           groupName,
           age,
@@ -63,12 +67,21 @@ export const calculatePersonValues = (
     });
     const index = topicsAndCompetences.findIndex(s => s.topic === topic);
     if (index > -1) {
-      topicsAndCompetences[index].competences.push({ name, gridValues, completed: isCompletedByPerson });
+      topicsAndCompetences[index].competences.push({
+        name,
+        gridValues,
+        completed: isCompletedByPerson,
+        preferredAge,
+        preferredAgePart,
+      });
+      topicsAndCompetences[index].competences.sort(
+        (a, b) => a.preferredAge - b.preferredAge || a.preferredAgePart - b.preferredAgePart
+      );
       topicsAndCompetences[index].completed = topicsAndCompetences[index].competences.every(s => s.completed);
     } else {
       topicsAndCompetences.push({
         topic,
-        competences: [{ name, gridValues, completed: isCompletedByPerson }],
+        competences: [{ name, gridValues, completed: isCompletedByPerson, preferredAge, preferredAgePart }],
         completed: isCompletedByPerson,
       });
     }
