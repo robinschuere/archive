@@ -37,6 +37,7 @@ type CompetenceCellValue = {
   agePart: number;
   color: string;
   completed: boolean;
+  isDisabled: boolean;
 };
 
 type TableTopic = {
