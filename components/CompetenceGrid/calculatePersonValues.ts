@@ -1,4 +1,4 @@
-import { partsPerAge } from './constants';
+import { ALL, partsPerAge } from './constants';
 
 export const calculatePersonValues = (
   person: PersonCompetence,
@@ -74,7 +74,7 @@ export const calculatePersonValues = (
     }
   });
 
-  if (selectedGroup !== 'ALL') {
+  if (selectedGroup !== ALL) {
     const filteredTopicsAndCompetences = topicsAndCompetences
       .filter(s => !s.completed)
       .map(topicAndCompetences => {

@@ -4,10 +4,11 @@ import { ageAndGroups, competences, person } from './data';
 import { calculatePersonValues } from './calculatePersonValues';
 import CompetenceGrid from './CompetenceGrid';
 import { getPersonGroup } from './getPersonGroup';
+import { ALL } from './constants';
 
 const Page = () => {
-  const [selectedAge, setSelectedAge] = useState('ALL');
-  const groups = ageAndGroups.filter(s => (selectedAge === 'ALL' ? true : s.name === selectedAge));
+  const [selectedAge, setSelectedAge] = useState(ALL);
+  const groups = ageAndGroups.filter(s => (selectedAge === ALL ? true : s.name === selectedAge));
   const { topicsAndCompetences } = calculatePersonValues(person, competences, ageAndGroups, selectedAge);
   return (
     <div style={{ height: '100%', width: '100%' }}>
@@ -22,7 +23,7 @@ const Page = () => {
             setSelectedAge(e.target.value);
           }}
         >
-          <option value="ALL">ALL</option>
+          <option value={ALL}>ALL</option>
           {ageAndGroups.map(s => (
             <option key={s.name} value={s.name}>
               {s.name} | ages: {s.ages.join(', ')}
