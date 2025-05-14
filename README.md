@@ -7,12 +7,21 @@ I think that a lot of what I do and see in the current workspace, is not new, an
 Information that you will find here (as of this moment) is heavily linked to:
 
 - ReactJs
+- NodeJs
 - Agile Scrum
 - Architecture
 
 Disclaimer:
 
-code that is visible here, is not truly tested. I will try to make sure that this happens, but it is not a promise!
+```ts
+return new Promise((resolve, reject) => {
+  if (codeBlock.isTested) {
+    resolve('Yes it is');
+  } else {
+    reject('No, it wasn't');
+  }
+})
+```
 
 ## Tooling
 
