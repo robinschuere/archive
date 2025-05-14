@@ -109,7 +109,8 @@ export const calculatePersonValues = (
             return true;
           }),
         };
-      });
+      })
+      .filter(s => s.competences.length > 0);
 
     return { topicsAndCompetences: filteredTopicsAndCompetences };
   }

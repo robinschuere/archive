@@ -36,7 +36,7 @@ const CompetenceGrid = ({ groups, topicsAndCompetences }: CompetenceGridProps) =
                     })
                   }
                 >
-                  {collapsedValues.includes(topic) ? '▼' : '▲'}
+                  {collapsedValues.includes(topic) ? '+' : '-'}
                 </button>
               </td>
             </tr>
