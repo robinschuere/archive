@@ -4,7 +4,7 @@ This idea with a frontend page-setup is that it should be very clear in what it 
 
 ![Page Setup](../images/page_setup.png)
 
-## Page:
+## Page
 
 The page is component that lies at the highest level and should be a near-match with the route that the user navigates to.
 A page should be the backbone of the complete view that the user sees. As such, the page should be the one-and-only place where BE interactions are made, or setup when more complex views are into place.
@@ -16,7 +16,8 @@ A page may have state, although it should be declared as a bridge between the us
 
 ## View
 
-A view is a component that lies inside a page component. It should be clear that a view is a link between business components. As such, the view itself should have state that is drilled down to the components that it concists of.
+A view is a component that lies inside a page component. It should be clear that a view is a link between business components. As such, the view itself should have state that is drilled down to the components that it consists of.
 
 ## Component
 A Component is an element or business component that lies at the lowest level. A component may not have state! Or should try to have no state. Its sole purpose is for the user to interact with or to show information that is exists out of. User interactions are hoisted to the view which in turn will set these values to use and will interact with the BE whenever this is necessary.
+
