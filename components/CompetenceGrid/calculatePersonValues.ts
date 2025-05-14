@@ -1,4 +1,5 @@
 import { PersonCompetence, Competence, AgeAndGroup } from './types';
+import { partsPerAge } from './constants';
 
 export const calculatePersonValues = (person: PersonCompetence, competences: Competence[], groups: AgeAndGroup[]) => {
   const definedAges: DefinedAgeCompetence[] = [];
