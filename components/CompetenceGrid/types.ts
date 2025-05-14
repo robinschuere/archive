@@ -1,13 +1,23 @@
-type Competence = {
+type GroupCompetencePreference = {
+  ages: number[];
+  parts: number[][];
+};
+
+type PersonCompetencePreference = {
+  age: number;
+  agePart: number;
+};
+
+type Competence<T> = {
   topic: string;
   name: string;
-  at: { ages: number[]; parts: [number[]] };
+  at: T;
 };
 
 type PersonCompetence = {
   name: string;
   age: 6;
-  competences: Competence[];
+  competences: Competence<PersonCompetencePreference>[];
 };
 
 type AgeAndGroup = {
