@@ -13,7 +13,7 @@ const CompetenceGrid = ({ groups, topicsAndCompetences }: CompetenceGridProps) =
     <table width="100%">
       <thead>
         <tr>
-          <th>Competences</th>
+          <th style={{ textAlign: 'left', minWidth: '200px' }}>Competences</th>
           {groups.map(group => (
             <th key={group.name}>{group.name}</th>
           ))}
@@ -23,7 +23,7 @@ const CompetenceGrid = ({ groups, topicsAndCompetences }: CompetenceGridProps) =
         {topicsAndCompetences.map(({ topic, competences }) => (
           <>
             <tr>
-              <td>
+              <td style={{ paddingLeft: '10px' }}>
                 <strong>{topic}</strong>{' '}
                 <button
                   type="button"
@@ -43,7 +43,18 @@ const CompetenceGrid = ({ groups, topicsAndCompetences }: CompetenceGridProps) =
             {!collapsedValues.includes(topic) &&
               competences.map(({ name, gridValues }) => (
                 <tr key={name}>
-                  <td style={{ paddingLeft: '10px' }}>{name}</td>
+                  <td
+                    style={{
+                      paddingLeft: '20px',
+                      textOverflow: 'ellipsis',
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      maxWidth: '200px',
+                    }}
+                    title={name}
+                  >
+                    {name}
+                  </td>
                   {groups.map(group => (
                     <td key={group.name}>
                       <div style={{ display: 'flex', justifyContent: 'center' }}>
