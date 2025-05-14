@@ -12,8 +12,8 @@ export const person: PersonCompetence = {
   name: 'Robin Schuerewegen',
   age: 6,
   competences: [
-    { topic: 'Ball-handling', name: 'Dribble with dominant hand', at: { age: 6, parts: [1] } },
-    { topic: 'Ball-handling', name: 'Dribble with non-dominant hand', at: { age: 7, parts: [1] } },
+    { topic: 'Ball-handling', name: 'Dribble with dominant hand', age: 6, agePart: 1 },
+    { topic: 'Ball-handling', name: 'Dribble with non-dominant hand', age: 7, agePart: 1 },
   ],
 };
 
@@ -21,25 +21,19 @@ export const competences: Competence[] = [
   {
     topic: 'Ball-handling',
     name: 'Dribble with dominant hand',
-    at: {
-      ages: [6],
-      parts: [[1, 2, 3]],
-    },
+    ages: [6],
+    ageParts: [[1, 2, 3]],
   },
   {
     topic: 'Ball-handling',
     name: 'Dribble with non-dominant hand',
-    at: {
-      ages: [7],
-      parts: [[1, 2, 3]],
-    },
+    ages: [7],
+    ageParts: [[1, 2, 3]],
   },
   {
     topic: 'Shooting',
     name: 'Throw at goal',
-    at: {
-      ages: [7],
-      parts: [[1, 2, 3]],
-    },
+    ages: [7],
+    ageParts: [[1, 2, 3]],
   },
 ];
