@@ -1,8 +1,9 @@
 type CompetenceGridProps = {
-  groups: any;
-  topicsAndCompetences: any;
-}
-const CompetenceGrid = ({ groups, topicsAndCompetences}: CompetenceGridProps) => {
+  groups: AgeAndGroup[];
+  topicsAndCompetences: TableTopic[];
+};
+
+const CompetenceGrid = ({ groups, topicsAndCompetences }: CompetenceGridProps) => {
   return (
     <table width="100%">
       <thead>
@@ -40,7 +41,7 @@ const CompetenceGrid = ({ groups, topicsAndCompetences}: CompetenceGridProps) =>
                                 alignItems: 'center',
                               }}
                             >
-                              <input type="checkbox" checked={s.completed} />
+                              <input type="checkbox" checked={s.completed} disabled={s.isDisabled} />
                             </div>
                           </td>
                         ))}

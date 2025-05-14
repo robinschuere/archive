@@ -1,10 +1,10 @@
-import { PersonCompetence, Competence, AgeAndGroup } from './types';
 import { partsPerAge } from './constants';
 
 export const calculatePersonValues = (
   person: PersonCompetence,
   competences: Competence<GroupCompetencePreference>[],
-  groups: AgeAndGroup[]
+  groups: AgeAndGroup[],
+  selectedGroup?: string
 ) => {
   const definedAges: DefinedAgeCompetence[] = [];
   groups.forEach(group => {
@@ -20,19 +20,18 @@ export const calculatePersonValues = (
     });
   });
   const topicsAndCompetences: TableTopic[] = [];
-  competences.forEach(({ topic, name, at }) => {
+  competences.forEach(({ topic, name, ages, ageParts }) => {
     let isCompletedByPerson = false;
     const gridValues = definedAges.map(({ age, groupName, agePart }) => {
       let isCompletedNow = false;
       if (
-        person.competences.find(
-          s => s.name === name && s.topic === topic && s.at.age === age && s.at.agePart === agePart
-        )
+        person.competences.find(s => s.name === name && s.topic === topic && s.age === age && s.agePart === agePart)
       ) {
         isCompletedNow = true;
         isCompletedByPerson = true;
       }
-      if (at.ages.includes(age)) {
+      const ageIndex = ages.findIndex(s => s === age);
+      if (ageIndex > -1 && ageParts[ageIndex].includes(agePart)) {
         return {
           groupName,
           age,
@@ -42,14 +41,15 @@ export const calculatePersonValues = (
           isDisabled: isCompletedByPerson && !isCompletedNow,
         };
       }
-      let color = 'purple';
-      if (at.ages[0] >= age) {
+      let color = 'white';
+
+      if (ages[ages.length - 1] + 1 <= age) {
         color = 'yellow';
       }
-      if (at.ages[at.ages.length - 1] + 1 <= age) {
+      if (ages[ages.length - 1] + 2 <= age) {
         color = 'orange';
       }
-      if (at.ages[at.ages.length - 1] + 2 <= age) {
+      if (ages[ages.length - 1] + 3 <= age) {
         color = 'red';
       }
       return {
@@ -63,14 +63,29 @@ export const calculatePersonValues = (
     });
     const index = topicsAndCompetences.findIndex(s => s.topic === topic);
     if (index > -1) {
-      topicsAndCompetences[index].competences.push({ name, gridValues });
+      topicsAndCompetences[index].competences.push({ name, gridValues, completed: isCompletedByPerson });
+      topicsAndCompetences[index].completed = topicsAndCompetences[index].competences.every(s => s.completed);
     } else {
       topicsAndCompetences.push({
         topic,
-        competences: [{ name, gridValues }],
+        competences: [{ name, gridValues, completed: isCompletedByPerson }],
+        completed: isCompletedByPerson,
       });
     }
   });
+
+  if (selectedGroup !== 'ALL') {
+    const filteredTopicsAndCompetences = topicsAndCompetences
+      .filter(s => !s.completed)
+      .map(topicAndCompetences => {
+        return {
+          ...topicAndCompetences,
+          competences: topicAndCompetences.competences.filter(s => !s.completed),
+        };
+      });
+
+    return { topicsAndCompetences: filteredTopicsAndCompetences };
+  }
 
   return { topicsAndCompetences };
 };
