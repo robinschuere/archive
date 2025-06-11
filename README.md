@@ -25,11 +25,11 @@ return new Promise((resolve, reject) => {
 
 ## Tooling
 
-https://playcode.io/react
+[React Playcode](https://playcode.io/react)
 
-https://www.typescriptlang.org/play/
+[Typescript Lang](https://www.typescriptlang.org/play/)
 
-https://excalidraw.com/
+[Excalidraw](https://excalidraw.com/)
 
 ## Useful links
 [Refactoring Guru](https://refactoring.guru/)
