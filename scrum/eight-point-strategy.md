@@ -8,7 +8,7 @@ Some pointers of what you should know:
 - I did not invent this Strategy on my own, I combined different things and it is perfectly possible that a strategy like this already exists inside Scrum teams.
 - A feature is a stakeholder request that has to be created to give more value to a project or product.
 - A story is a Scrummee request for a functional piece of the feature which on its own has to bring value to the project. A story is alsy time dependant as it has to be completed during a sprint.
-- A Spike is a Scrummee to increase value linked to a feature, but remains a separate track inside Scrum as it is more time independant then a Story. It can envelop multiple sprints.
+- A Spike is a Scrummee request to increase value linked to a feature, but remains a separate track inside Scrum as it is more time dependant then a Story. It can envelop multiple sprints.
 - A Story is linked to 1 feature.
 - A Spike is linked to 1 feature.
 - A Feature is linked to many stories, and linked to 1 Epic.
