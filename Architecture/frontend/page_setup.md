@@ -20,4 +20,3 @@ A view is a component that lies inside a page component. It should be clear that
 
 ## Component
 A Component is an element or business component that lies at the lowest level. A component may not have state! Or should try to have no state. Its sole purpose is for the user to interact with or to show information that is exists out of. User interactions are hoisted to the view which in turn will set these values to use and will interact with the BE whenever this is necessary.
-
