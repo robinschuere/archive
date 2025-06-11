@@ -30,3 +30,7 @@ https://playcode.io/react
 https://www.typescriptlang.org/play/
 
 https://excalidraw.com/
+
+## Useful links
+
+(Refactoring Guru)[https://refactoring.guru/]
