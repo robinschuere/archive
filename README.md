@@ -1,6 +1,8 @@
 # Archive
 
-I am Robin Schuerewegen, a Developer living in Belgium.
+I am Robin Schuerewegen, a Software Developer living in Belgium. 
+
+Started in 2011 with writing software in .Net with Silverlight and Sql-Server. After 5 years I made the switch to Fullstack javascript developer.
 
 I think that a lot of what I do and see in the current workspace, is not new, and thus I wanted to place the information that I still have inside a repository to look back on.
 
