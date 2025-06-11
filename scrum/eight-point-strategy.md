@@ -15,9 +15,9 @@ Some pointers of what you should know:
 - A Refinement is a Scrum tradition to gain knowledge of a feature or story and can be used to estimate story points.
 - Scrummees are members of a scrum team.
   - Scrum Master
-  - PO  
+  - PO
   - Analysts
-  - Developers (Architect, Tech Leads, Devs)
+  - Developers (Architect, Tech Leads, Devs, QA)
  
 IMPORTANT:
 - However you want to use this strategy, make sure your team understands what is is, and that they have an equal say in an estimation proposal. No ones vote is heavier!
