@@ -32,5 +32,4 @@ https://www.typescriptlang.org/play/
 https://excalidraw.com/
 
 ## Useful links
-
-(Refactoring Guru)[https://refactoring.guru/]
+[https://refactoring.guru/](Refactoring Guru)
