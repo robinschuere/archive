@@ -1,3 +1,8 @@
+/**
+  * This page should show how column can have a scrollable and non-scrollable part
+*/
+
+
 export default function MainPage () {
   return (
     <div style={{ height: "100vh", width: "100vw", overflow: 'hidden'}}>
