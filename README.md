@@ -35,3 +35,6 @@ return new Promise((resolve, reject) => {
 
 ## Useful links
 [Refactoring Guru](https://refactoring.guru/)
+
+## Skill list in a wordcloud (Because who doesn't want that)
+![Skills acquired over the years](./images/skills.png)
