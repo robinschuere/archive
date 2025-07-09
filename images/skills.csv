@@ -1,0 +1,39 @@
+word;weight;color;angle;font;repeat;url
+Javascript;10;auto
+ReactJs;10;auto
+T-SQL;7;auto;
+Postgresql;8;auto
+NodeJs;8;auto
+TypeScript;5;auto
+Jira;7;auto
+TortoiseSVN;2;auto
+ExpressJS;7;auto
+SQL-Server;6;auto
+KnexJs;6;auto
+RabbitMQ;4;auto
+C#;6;auto
+Redis;5;auto
+Atlassian Devops;6;auto
+Azure Devops;3;auto
+CSS;8;auto
+SASS;1;auto
+Coaching;5;auto
+MongoDb;5;auto
+Microservice Architecture;4;auto
+Winforms;4;auto
+Bootstrap;4;auto
+ASP.NET;1;auto
+Websockets;4;auto
+React Native;1;auto
+Monorepo Architecture;8;auto
+Git;10;auto
+Fontawesome;3;auto
+Figma;2;auto
+NextJs;2;auto
+C++;1;auto
+SRSS;1;auto
+SISS;1;auto
+Crystal Reporting Services;1;auto
+NestJs;1;auto
+SolidJs;1;auto
+Elm;1;auto
