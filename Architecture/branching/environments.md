@@ -24,16 +24,25 @@ In most teams, this setup presents us with some disadvantages:
 
 The idea behind this technique is that each environment gets its own dedicated branch on which developers can work.
 
-|branch|environment|comment
+### Necessary Branches
+
+Some branches are more necessary then others:
+
+|Branch|Environment|Who
 |--|--|--|
-|dev|development|necessary with bigger teams and to see changes without breaking production
-|test|test|necessary when test teams are independantly checking the outcomes
-|qa|qa|necessary when QA-teams are independantly checking the outcomes
-|uat|uat|necessary when UAT-teams are independantly checking the outcomes
-|demo|demo|necessary when sales-teams are independantly showing demos
-|master|production|necessary for having a production environment
-|master|pre-production|necessary when having an environment that resembles the latest release
-|master_[release_version]|production|necessary for having a production environment
+|development|development|developers
+|test|test|test engineers
+|main|production|users
+
+### Branches regarding more specific teams
+
+|branch|environment|Who
+|--|--|--|
+|qa|qa|QA-teams
+|uat|uat|UAT teams
+|demo|demo|Sales-teams
+|master|pre-production|anyone except users
+|master_[release_version]|production|users
 
 This also presents us with some disadvantages
 
