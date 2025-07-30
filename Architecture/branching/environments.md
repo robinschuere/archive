@@ -71,4 +71,5 @@ Bigger companies with many clients and different workflow processes have a need 
 |upgrade|*|the branch following the current branch (**)|upgrade is tested on the new branch
 
 (*) the order to follow is main, ..., test, development. 
+
 (**) the order to follow is development, test, ..., main. 
