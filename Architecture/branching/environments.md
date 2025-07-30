@@ -22,8 +22,9 @@ The idea behind this technique is that each environment gets its own dedicated b
 |--|--|--|
 |dev|development|necessary with bigger teams and to see changes without breaking production
 |test|test|necessary when test teams are independantly checking the outcomes
-|qa|qa|necessary when creating QA-teams to do E2E testing and business approvals
-|demo|demo|necessary when creating sales-teams to do demos
+|qa|qa|necessary when QA-teams are independantly checking the outcomes
+|uat|uat|necessary when UAT-teams are independantly checking the outcomes
+|demo|demo|necessary when sales-teams are independantly showing demos
 |master|production|necessary for having a production environment
 |master|pre-production|necessary when having an environment that resembles the latest release
 |master_[release_version]|production|necessary for having a production environment
