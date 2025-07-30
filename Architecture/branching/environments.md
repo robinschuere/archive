@@ -8,7 +8,7 @@ Or, the issue with starting from one main branch as a whole and never splitting 
 
 This could be an exaggerated image. What we see here is a single point of entry that is the driven force between all our environments. This however will present us with a not-so-nice issue.
 
-`We always deploy a snapshot of the main branch which becomes obsolete as soon as a new piece of content is added to the main branch.`
+`We always deploy a snapshot of the main branch which becomes obsolete as soon as a new code is added to the main branch.`
 
 In most teams, this setup presents us with some disadvantages:
 
