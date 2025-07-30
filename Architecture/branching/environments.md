@@ -59,7 +59,6 @@ Bigger companies with many clients and different workflow processes have a need 
 
 - Upgrading a branch must always happen under a strict form of communication.
 - strict merge strategies per branch
-- More repositories
 - More costs
 
 ### Merging strategies
