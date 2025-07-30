@@ -68,6 +68,7 @@ Bigger companies with many clients and different workflow processes have a need 
 |new feature|*|dev|test|all tests are green
 |bugfix|*|dev|test|all tests are green
 |hotfix|*|the branch where it broke|all preceeding branches (*)|hotfix was tested on that branch
-|upgrade|*|the branch following the current branch|upgrade is tested on the new branch
+|upgrade|*|the branch following the current branch (**)|upgrade is tested on the new branch
 
-(*) the order to follow is development, test, ..., main. 
+(*) the order to follow is main, ..., test, development. 
+(**) the order to follow is development, test, ..., main. 
