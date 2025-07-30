@@ -10,7 +10,7 @@ This could be an exaggerated image. What we see here is a single point of entry 
 
 `We always deploy a snapshot of the main branch which becomes obsolete as soon as a new piece of content is added to the main branch.`
 
-In most teams, this setup presents us with a very volatile environment. Cherry picking strategies have to be added to fix certain environments while other pieces of code are not supposed to be pushed to said environment.
+In most teams, this setup presents us with a very volatile environment. Cherry picking strategies have to be added to fix certain environments while other pieces of code are not supposed to be pushed to said environment. We also have to take into account that features, bugfixes, deprecating code and hotfixes will be done on one branch which will present us directly with all other 
 
 ## Splitting main up in designated branches
 
@@ -27,3 +27,10 @@ The idea behind this technique is that each environment gets its own dedicated b
 |master|production|necessary for having a production environment
 |master|pre-production|necessary when having an environment that resembles the latest release
 |master_[release_version]|production|necessary for having a production environment
+
+This also presents us with some disadvantages
+
+- Upgrading a branch must always happen under a strict form of communication.
+- strict merge strategies per branch
+- More repositories
+- More costs
