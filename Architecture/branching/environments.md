@@ -48,6 +48,13 @@ Bigger companies with many clients and different workflow processes have a need 
 
 ### Advantages
 
+- Every team has their own environment
+- A broken branch does no longer break all environments
+- Lesser use of cherry picking techniques
+- Hotfixes are done on the environment where it broke
+- Upgrades can break environments but will not break all environments
+- allows easy merge strategies
+
 ### Disadvantages
 
 - Upgrading a branch must always happen under a strict form of communication.
@@ -62,3 +69,5 @@ Bigger companies with many clients and different workflow processes have a need 
 |bugfix|*|dev|test|all tests are green
 |hotfix|*|the branch where it broke|all preceeding branches (*)|hotfix was tested on that branch
 |upgrade|*|the branch following the current branch|upgrade is tested on the new branch
+
+(*) the order to follow is development, test, ..., main. 
