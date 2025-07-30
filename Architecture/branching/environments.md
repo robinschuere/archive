@@ -36,7 +36,9 @@ Some branches are more necessary then others:
 
 ### Branches regarding more specific teams
 
-|branch|environment|Who
+Bigger companies with many clients and different workflow processes have a need for more environments
+
+|Branch|Environment|Who
 |--|--|--|
 |qa|qa|QA-teams
 |uat|uat|UAT teams
@@ -44,7 +46,9 @@ Some branches are more necessary then others:
 |master|pre-production|anyone except users
 |master_[release_version]|production|users
 
-This also presents us with some disadvantages
+### Advantages
+
+### Disadvantages
 
 - Upgrading a branch must always happen under a strict form of communication.
 - strict merge strategies per branch
@@ -56,4 +60,5 @@ This also presents us with some disadvantages
 |--|--|--|--|--|
 |new feature|*|dev|test|all tests are green
 |bugfix|*|dev|test|all tests are green
-|hotfix|*|the branch where it broke|all lower branches (*)|hotfix was tested on that branch
+|hotfix|*|the branch where it broke|all preceeding branches (*)|hotfix was tested on that branch
+|upgrade|*|the branch following the current branch|upgrade is tested on the new branch
