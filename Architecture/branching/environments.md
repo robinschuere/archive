@@ -10,7 +10,13 @@ This could be an exaggerated image. What we see here is a single point of entry 
 
 `We always deploy a snapshot of the main branch which becomes obsolete as soon as a new piece of content is added to the main branch.`
 
-In most teams, this setup presents us with a very volatile environment. Cherry picking strategies have to be added to fix certain environments while other pieces of code are not supposed to be pushed to said environment. We also have to take into account that features, bugfixes, deprecating code and hotfixes will be done on one branch which will present us directly with all other 
+In most teams, this setup presents us with some disadvantages:
+
+- Cherry picking techniques have to be used to fix certain environments.
+- Features, bugfixes, hotfixes and deprecated code are all the same from a process point of view.
+- In bigger teams, this creates a volatile developer environment. (Sometimes hostile envrionments)
+- Teams are depending on the same branch
+- Teams are working on the same branch
 
 ## Splitting main up in designated branches
 
@@ -35,3 +41,10 @@ This also presents us with some disadvantages
 - strict merge strategies per branch
 - More repositories
 - More costs
+
+### Merging strategies
+|what|environment|on which branch|merge to|when
+|--|--|--|--|--|
+|new feature|*|dev|test|all tests are green
+|bugfix|*|dev|test|all tests are green
+|hotfix|*|the branch where it broke|all lower branches (*)|hotfix was tested on that branch
