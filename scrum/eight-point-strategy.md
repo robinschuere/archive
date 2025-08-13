@@ -1,25 +1,34 @@
 # The Eight Point Estimation Strategy
 
-The eight point strategy is a personal interpretation of how to do story splitting into smaller stories with a simple estimation strategy.
+The eight point strategy is a personal interpretation of how to estimations based on a simplified Fibonacci sequence while doing Story Refinements.
 
 ## What you should know:
 
 - I did not invent this on my own, I combined different things and it is perfectly possible something similar already exists and is used.
-- A feature is a stakeholder request that has to be created to give more value to a project or product.
-- A story is a Scrummee request for a functional piece of the feature which on its own has to bring value to the project. A story is time dependant as it has to be completed during a sprint.
-- A Spike is a Scrummee request to increase value linked to a feature, but remains a separate track inside Scrum as it is more time dependant then a Story. It can envelop multiple sprints.
-- A Story is linked to 1 feature.
-- A Spike is linked to 1 feature.
-- A Feature is linked to many stories, and linked to 1 Epic.
-- A Refinement is a Scrum tradition to gain knowledge of a feature or story and can be used to estimate story points.
-- Scrummees are members of a scrum team.
+- You should know what Scrum is (or have some experience with it)
+- You should know what the difference roles in Scrum are (Scrum specific or Company specific)
+
+## But, we have to agree on:
+- The Members of a Scrum Team (Scrummees) are:
   - Scrum Master
   - Product Owner (PO)
-  - Analysts
-  - Developers (Architect, Tech Leads, Devs, QA)
- 
+  - Developers (Architect, Analysts, Tech Leads, Devs, QA, ...)
+- Stakeholder request functionalities to give more value to a product.
+  - A Stakeholder can be a User or Scrummee
+- A Feature can have many stories and spikes
+- A story is a Scrummee request for a functional piece of a feature which on its own has to bring value to the project.
+  - A story is time dependant and has to be completed during a sprint.
+  - A Story is linked to 1 feature.
+- A Spike is a Scrummee request for a functional piece of a feature which on its own has to bring value to the project.
+  - A Spike is time dependant and can envelop many sprints.
+  - A Spike is linked to 1 feature.
+- A Refinement is a way to gain knowledge of a feature request
+  - it is used to discuss the feature and or analysis
+  - it is used to split the feature up in stories and or spikes
+  - it is used to define an estimation on the stories and or spikes
+  
 IMPORTANT:
-- However you want to use this strategy, make sure your team understands what is is, and that they have an equal say in an estimation proposal. No ones vote is heavier!
+- However you want to use this strategy, make sure your team agrees on this list what is is, and that they have an equal say in an estimation proposal. No ones vote is heavier!
 
 ## Per Google
 
@@ -34,7 +43,7 @@ IMPORTANT:
 - Scrummees decide if extra technical analysis is required
 - Scrummees split the feature into stories (and spikes whenever necessary)
 
-## Definining Estimations Tags: Is is complex, is it a lot (or both)
+## Definining a rule about Estimation Tags: Is is complex, is it a lot (or both)
 
 During my time as a developer, I felt that a lot of my stories revolved around doing something complex or doing something a lot. For this I started working with 2 values namely Complexity and Weight.
 
@@ -61,10 +70,6 @@ An important rule that I find necessary in the Eight Point Estimation Strategy i
 This sounds very harsch, but the reasoning behind this is to make the life of the developer easier. By setting a hard requirement on, a story has to be completed in one day, it gives more weight to the Refinement process. Developers have to think thoroughly about the requirements of a story and have to make sure that it is in fact completable in one day. If it isn't, the story has to be split up or pulled into a spike.
 
 ## Estimating with Fibonacci? 1 - (2) - 3 - 5 - 8 - 13?
-
-The numbers you see here are part of the fibonacci sequence without some numbers.
-
-### Based on
 
 - Relative sizing based on comparing similar tasks without estimating absolute time
 - Values make sense as they are linked to something
@@ -136,13 +141,8 @@ If, after discussing, no concessus is to be found to do the request in a story, 
 
 ### Playthrough example
 
-- can the story be completed in one day?
-  - No: Value 13
-  - Yes: How does the story translate to Complexity and Weight?
-    - Complex and heavy: Value 13
-    - Complex != heavy: How Complex|Heavy is the story
-      - very: Value 13
-      - Somewhat: Value 1, 3, 5, 8 or 13 can be discussed.
+<img width="3132" height="3024" alt="image" src="https://github.com/user-attachments/assets/33f1caa3-4403-4ab6-be3a-95ed0f749afc" />
+
      
 ## Analysis, Development and Testing track
 
