@@ -12,7 +12,6 @@ export const useInitializeHook = <T>(
 
   useEffect(() => {
     if (!isInitialized && dependencies.every(s => !!s)) {
-      console.log('Initializing value, dependencies are loaded');
       setState({ isInitialized: true, value: onInitialize(dependencies) });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
