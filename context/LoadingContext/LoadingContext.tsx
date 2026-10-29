@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 const LoadingContext = createContext(null);
 
-export type PageLoadingLevel = 'Page';
+const PageLoadingLevel = 'Page';
 
 type LoadingState = {
   name: string     // The name of the loading state 
@@ -42,4 +42,4 @@ const useLoadingContext = () => {
   return useContext(LoadingContext)
 }
 
-export default { LoadingProvider, useLoadingContext };
+export default { LoadingProvider, useLoadingContext, PageLoadingLevel };
