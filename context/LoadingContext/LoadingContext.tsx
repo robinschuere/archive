@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 const LoadingContext = createContext(null);
 
-const reducer = () => (state, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case 'add';
       return [
@@ -17,7 +17,7 @@ const reducer = () => (state, action) => {
 }
 
 const LoadingProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer(), []);
+  const [state, dispatch] = useReducer(reducer, []);
   const isLoading = loadingStates.length > 0;
   return (
     <LoadingContext.Provider value={{ isLoading, dispatch }}>
