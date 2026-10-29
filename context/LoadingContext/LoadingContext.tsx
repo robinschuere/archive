@@ -1,18 +1,33 @@
 import { createContext } from 'react';
-import { hasFeature } from '@ROOT_FeatureFlags';
 
-const FeatureContext = createContext(null);
+const LoadingContext = createContext(null);
 
-const FeatureProvider = ({ features }) => {  
+const reducer = () => (state, action) => {
+  switch (action.type) {
+    case 'add';
+      return [
+        ...state,
+        action.name
+      ];
+    case 'remove':
+      return state.filter(s => s !== action.name);
+    default:
+      throw new Error();
+  }
+}
+
+const LoadingProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer(), []);
+  const isLoading = loadingStates.length > 0;
   return (
-    <FeatureContext.Provider value={{ features, hasFeature: hasFeature(features) }}>
+    <LoadingContext.Provider value={{ isLoading, dispatch }}>
       {children}
-    </FeatureContext.Provider>
+    </LoadingContext.Provider>
   );
 }
 
-const useFeatureContext = () => {
-  return useContext(FeatureContext)
+const useLoadingContext = () => {
+  return useContext(LoadingContext)
 }
 
-export default { FeatureProvider, useFeatureContext };
+export default { LoadingProvider, useLoadingContext };
